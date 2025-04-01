@@ -1,0 +1,46 @@
+chart_id,pattern,title,title_length,y_ticks,data_file
+1,upward,Company Revenue Over Years,4,"[0, 30, 60, 90]",10_chart.json
+2,upward,Stock Markets Through Decades,4,"[0, 50, 100]",11_chart.json
+3,upward,Population Growth Through Years,4,"[0, 25, 50, 75, 100]",1_chart.json
+4,upward,Company Revenue Analysis Growth^ from 2000 to 2020,8,"[0, 50, 100]",2_chart.json
+5,upward,Tracking Annual Precipitation Rates^ during 2000 to 2020,8,"[0, 30, 60, 90]",3_chart.json
+6,upward,Stock Market Values Vary^ Significantly: 2000 to 2020,8,"[0, 25, 50, 75, 100]",4_chart.json
+7,upward,Consistent Tracking of Annual Stock Market Values:^ Insights in Current Stable Patterns,12,"[0, 30, 60, 90]",5_chart.json
+8,upward,Average Company Revenue from 2000 to 2020:^ Constant Trends Through the Years,12,"[0, 25, 50, 75, 100]",6_chart.json
+9,upward,Average Car Sales in 2000-2020: An Increasing^ Consumer Demand and Economic Factors,12,"[0, 50, 100]",7_chart.json
+10,downward,Average Growth in Car Sales,4,"[0, 30, 60, 90]",8_chart.json
+11,downward,Population Growth Through Years,4,"[0, 25, 50, 75, 100]",9_chart.json
+12,downward,Company Revenue Over Years,4,"[0, 50, 100]",10_chart.json
+13,downward,Company Revenue Analysis Growth^ from 2000 to 2020,8,"[0, 50, 100]",11_chart.json
+14,downward,Stock Market Values Vary^ Significantly: 2000 to 2020,8,"[0, 30, 60, 90]",1_chart.json
+15,downward,Average Yearly Population Trends from 2000 to 2020,8,"[0, 25, 50, 75, 100]",2_chart.json
+16,downward,Consistent Tracking of Annual Stock Market Values:^ Insights in Current Stable Patterns,12,"[0, 50, 100]",3_chart.json
+17,downward,Average Car Sales in 2000-2020: An Increasing^ Consumer Demand and Economic Factors,12,"[0, 25, 50, 75, 100]",4_chart.json
+18,downward,Average Company Revenue from 2000 to 2020:^ Constant Trends Through the Years,12,"[0, 30, 60, 90]",5_chart.json
+19,peak/valley,Yearly Changing Precipitation Rates,4,"[0, 30, 60, 90]",6_chart.json
+20,peak/valley,Company Revenue Over Years,4,"[0, 50, 100]",7_chart.json
+21,peak/valley,Population Growth Through Years,4,"[0, 25, 50, 75, 100]",8_chart.json
+22,peak/valley,Tracking Average Car Sales from^ 2000 to 2020,8,"[0, 25, 50, 75, 100]",9_chart.json
+23,peak/valley,Stock Market Values Vary^ Significantly: 2000 to 2020,8,"[0, 30, 60, 90]",10_chart.json
+24,peak/valley,Average Yearly Population Trends from 2000 to 2020,8,"[0, 50, 100]",11_chart.json
+25,peak/valley,Average Car Sales in 2000-2020: An Increasing^ Consumer Demand and Economic Factors,12,"[0, 50, 100]",1_chart.json
+26,peak/valley,Yearly Precipitation Patterns and Trends in^ Rainfall Across Regions between 2000 to 2020,12,"[0, 25, 50, 75, 100]",2_chart.json
+27,peak/valley,Understanding Population Growth Trends and^ Projecting Future Increases from 2000 to 2020,12,"[0, 30, 60, 90]",3_chart.json
+28,uniform,Yearly Changing Precipitation Rates,4,"[0, 25, 50, 75, 100]",4_chart.json
+29,uniform,Stock Markets Through Decades,4,"[0, 30, 60, 90]",5_chart.json
+30,uniform,Average Growth in Car Sales,4,"[0, 50, 100]",6_chart.json
+31,uniform,Average Yearly Population Trends from 2000 to 2020,8,"[0, 30, 60, 90]",7_chart.json
+32,uniform,Tracking Average Car Sales from^ 2000 to 2020,8,"[0, 50, 100]",8_chart.json
+33,uniform,Company Revenue Analysis Growth^ from 2000 to 2020,8,"[0, 25, 50, 75, 100]",9_chart.json
+34,uniform,Yearly Precipitation Patterns and Trends in^ Rainfall Across Regions between 2000 to 2020,12,"[0, 30, 60, 90]",10_chart.json
+35,uniform,Consistent Tracking of Annual Stock Market Values:^ Insights in Current Stable Patterns,12,"[0, 25, 50, 75, 100]",11_chart.json
+36,uniform,Average Company Revenue from 2000 to 2020:^ Constant Trends Through the Years,12,"[0, 50, 100]",1_chart.json
+37,irregular,Yearly Changing Precipitation Rates,4,"[0, 50, 100]",2_chart.json
+38,irregular,Company Revenue Over Years,4,"[0, 25, 50, 75, 100]",3_chart.json
+39,irregular,Population Growth Through Years,4,"[0, 30, 60, 90]",4_chart.json
+40,irregular,Average Yearly Population Trends from 2000 to 2020,8,"[0, 25, 50, 75, 100]",5_chart.json
+41,irregular,Company Revenue Analysis Growth^ from 2000 to 2020,8,"[0, 30, 60, 90]",6_chart.json
+42,irregular,Tracking Average Car Sales from^ 2000 to 2020,8,"[0, 50, 100]",7_chart.json
+43,irregular,Understanding Population Growth Trends and^ Projecting Future Increases from 2000 to 2020,12,"[0, 25, 50, 75, 100]",8_chart.json
+44,irregular,Yearly Precipitation Patterns and Trends in^ Rainfall Across Regions between 2000 to 2020,12,"[0, 30, 60, 90]",9_chart.json
+45,irregular,Consistent Tracking of Annual Stock Market Values:^ Insights in Current Stable Patterns,12,"[0, 50, 100]",10_chart.json

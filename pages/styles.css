@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: sans-serif;
+  }
+
+  p {
+    text-align: left;
+    font-size: large;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .study-container {
+  position: relative; /* So the h1 positions relative to this container */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chart-heading {
+  position: absolute;
+  top: 40px; /* Raise the heading above the container */
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chart-container {
+  margin-right: 50px;
+}
+
+  .confidence-scale {
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.confidence-scale label {
+  display: block;
+  margin-bottom: 6px;
+}
+.likert-horizontal {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.likert-horizontal label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: normal;
+  text-indent: 5px;
+}
+
+.likert-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 370px;
+  margin: auto;
+  font-size: 0.9em;
+  color: #666;
+}
+
+  
+  .study-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .step {
+    display: none; /* Hide all by default */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .step.active {
+    display: flex; /* Show only the active section */
+  }
+  
+  .chart-placeholder {
+    width: 400px;
+    height: 400px;
+    background-color: #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #progress-indicator {
+    position: absolute;
+    top: 20px;
+    left: 90%;
+    transform: translateX(-50%);
+    font-size: 18px;
+  }
+  
+  .next-btn {
+    margin-top: 10px;
+    padding: 5px;
+
+    font-size: large;
+  }
+
+  .start-btn {
+    margin-top: 10px;
+    padding: 5px;
+    width: 340px;
+    font-size: large;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+
+  .start-container {
+    background-color: #eee;
+    border-radius: 20px;
+    padding: 40px;
+    width: 1100px;
+    line-height: 1.6;
+    margin-top: 15px;
+    
+  }
+
+  label {
+    margin-right: 20px;
+  }
+
+  .rad {
+    text-align: left;
+  }
+  .rad p {
+    margin-bottom: 20px;
+  }
+
+  select {
+    width: 15%;
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  textarea {
+    resize: none;
+    margin-top: 5px;
+  }
+
+  /* Red border for invalid input */
+  textarea.invalid {
+    border: 2px solid red;
+  }
+  
+  /* Shake animation */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  textarea.shake {
+    animation: shake 0.3s;
+  }
+  input.shake {
+    animation: shake 0.3s;
+  }
+
+  #timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
