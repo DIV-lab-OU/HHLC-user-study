@@ -30,7 +30,7 @@ titles = {
     "8_words": [
         "Company Revenue Analysis Growth^ from 2000 to 2020",
         "Stock Market Values Vary^ Significantly: 2000 to 2020",
-        "Tracking Annual Precipitation Rates^ during 2000 to 2020",
+        "Tracking Annual Precipitation Rates during 2000 to 2020",
         "Tracking Average Car Sales from^ 2000 to 2020",
         "Average Yearly Population Trends from 2000 to 2020"
     ],
@@ -38,7 +38,7 @@ titles = {
         "Average Company Revenue from 2000 to 2020:^ Constant Trends Through the Years",
         "Consistent Tracking of Annual Stock Market Values:^ Insights in Current Stable Patterns",
         "Yearly Precipitation Patterns and Trends in^ Rainfall Across Regions between 2000 to 2020",
-        "Average Car Sales in 2000-2020: An Increasing^ Consumer Demand and Economic Factors",
+        "Average Car Sales in 2000-2020: A Significant^ Consumer Demand and Economic Factors",
         "Understanding Population Growth Trends and^ Projecting Future Increases from 2000 to 2020"
     ]
 }

@@ -28,19 +28,46 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
 }
 
 .chart-heading {
   position: absolute;
-  top: 40px; /* Raise the heading above the container */
-  font-size: 24px;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
 }
 
+
 .chart-container {
   margin-right: 50px;
 }
+
+#progress-bar-container {
+  width: 250px;                /* or adjust as needed */
+  height: 25px;
+  background-color: #e0e0e0;
+  position: fixed;
+  top: 20px;                   /* spacing from top */
+  right: 20px;                 /* spacing from right */
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #0d6efd;
+  transition: width 0.3s ease-in-out;
+  border-radius: 2px 0 0 2px;
+}
+
+
 
   .confidence-scale {
   text-align: left;
@@ -184,6 +211,11 @@
   }
   input.shake {
     animation: shake 0.3s;
+  }
+
+  .shake {
+    animation: shake 0.3s;
+    border: 2px solid red;
   }
 
   #timer {
