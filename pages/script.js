@@ -33,7 +33,7 @@ for (let i = 0; i < totalCharts; i++) {
     <div class="start-container1">
       <div class="chart-heading">
         <div>Line Chart <span class="highlight">${chartNumber}</span> of ${totalCharts}</div>
-        <div>Part <span class="highlight">1</span> of 3</div>
+        <div>Task <span class="highlight">1</span> of 3</div>
       </div>
       <div class="study-container">
         <div class="chart-container">
@@ -68,7 +68,7 @@ for (let i = 0; i < totalCharts; i++) {
     <div class="start-container1">
       <div class="chart-heading">
         <div>Line Chart <span class="highlight">${chartNumber}</span> of ${totalCharts}</div>
-        <div>Part <span class="highlight">2</span> of 3</div>
+        <div>Task <span class="highlight">2</span> of 3</div>
       </div>
       <div class="study-container">
         <div class="chart-container">
@@ -98,7 +98,7 @@ for (let i = 0; i < totalCharts; i++) {
     <div class="start-container1">
       <div class="chart-heading">
         <div>Line Chart <span class="highlight">${chartNumber}</span> of ${totalCharts}</div>
-        <div>Part <span class="highlight">3</span> of 3</div>
+        <div>Task <span class="highlight">3</span> of 3</div>
       </div>
       <div class="study-container">
         <div class="chart-container">
