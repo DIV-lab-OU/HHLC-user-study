@@ -1,5 +1,5 @@
 // Constants
-const totalCharts = 45;
+const totalCharts = 54;
 const totalSteps = totalCharts * 3;
 const container = document.body;
 let timer;
@@ -30,10 +30,10 @@ for (let i = 0; i < totalCharts; i++) {
   if (i === 0) trendStep.classList.add('active');
 
   trendStep.innerHTML = `
-    <div class="start-container">
+    <div class="start-container1">
       <div class="chart-heading">
-        <div>Line Chart ${chartNumber} of ${totalCharts}</div>
-        <div>Part 1 of 3</div>
+        <div>Line Chart <span class="highlight">${chartNumber}</span> of ${totalCharts}</div>
+        <div>Part <span class="highlight">1</span> of 3</div>
       </div>
       <div class="study-container">
         <div class="chart-container">
@@ -45,7 +45,8 @@ for (let i = 0; i < totalCharts; i++) {
           <label><input type="radio" name="trend${i}" value="Downward"> Downward</label>
           <label><input type="radio" name="trend${i}" value="Irregular"> Irregular</label>
           <label><input type="radio" name="trend${i}" value="Uniform"> Uniform</label>
-          <label><input type="radio" name="trend${i}" value="Peak/Valley"> Peak/Valley</label>
+          <label><input type="radio" name="trend${i}" value="Peak"> Peak</label>
+          <label><input type="radio" name="trend${i}" value="Valley"> Valley</label>
         </div>
       </div>
     </div>
@@ -64,10 +65,10 @@ for (let i = 0; i < totalCharts; i++) {
   ).join('');
 
   confidenceStep.innerHTML = `
-    <div class="start-container">
+    <div class="start-container1">
       <div class="chart-heading">
-        <div>Line Chart ${chartNumber} of ${totalCharts}</div>
-        <div>Part 2 of 3</div>
+        <div>Line Chart <span class="highlight">${chartNumber}</span> of ${totalCharts}</div>
+        <div>Part <span class="highlight">2</span> of 3</div>
       </div>
       <div class="study-container">
         <div class="chart-container">
@@ -94,10 +95,10 @@ for (let i = 0; i < totalCharts; i++) {
   textStep.classList.add('step');
 
   textStep.innerHTML = `
-    <div class="start-container">
+    <div class="start-container1">
       <div class="chart-heading">
-        <div>Line Chart ${chartNumber} of ${totalCharts}</div>
-        <div>Part 3 of 3</div>
+        <div>Line Chart <span class="highlight">${chartNumber}</span> of ${totalCharts}</div>
+        <div>Part <span class="highlight">3</span> of 3</div>
       </div>
       <div class="study-container">
         <div class="chart-container">

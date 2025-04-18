@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles.css" />
+  <title>Line Chart Study - Demo</title>
+
+  <style>
+    .chart-heading {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .chart-container img {
+      max-width: 100%;
+      max-height: 300px;
+      margin-bottom: 15px;
+    }
+
+    .likert-horizontal {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .likert-horizontal label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .likert-labels {
+      display: flex;
+      justify-content: space-between;
+      width: 250px;
+      margin: auto;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .start-container1 {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .highlight {
+      color: #0d6efd;
+      font-weight: bold;
+    }
+
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .center-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .timer {
+      color: red;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style="text-align: center;">Demo Chart Walkthrough</h2>
+    <p style="text-align: center;">Below is a full demo of how a single chart interaction will look.</p>
+
+    <!-- Step 1 -->
+    <section class="step active">
+      <div class="start-container1">
+        <div class="timer" data-duration="10">Time Left: 10.0s</div>
+        <div class="chart-heading">
+          <div>Line Chart <span class="highlight">Demo</span></div>
+          <div>Part <span class="highlight">1</span> of 3</div>
+        </div>
+        <div class="study-container">
+          <div class="chart-container">
+            <img src="../fakeimages/demo.png" alt="Demo Chart">
+          </div>
+          <div class="study-radio">
+            <p>What trend do you see in the line chart?</p>
+            <label><input type="radio" name="demo-trend" value="Upward"> Upward</label>
+            <label><input type="radio" name="demo-trend" value="Downward"> Downward</label>
+            <label><input type="radio" name="demo-trend" value="Irregular"> Irregular</label>
+            <label><input type="radio" name="demo-trend" value="Uniform"> Uniform</label>
+            <label><input type="radio" name="demo-trend" value="Peak/Valley"> Peak</label>
+            <label><input type="radio" name="demo-trend" value="Peak/Valley"> Valley</label>
+          </div>
+        </div>
+      </div>
+      <div class="center-btn">
+        <button class="next-btn">Next</button>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step">
+      <div class="start-container1">
+        <div class="timer" data-duration="10">Time Left: 10.0s</div>
+        <div class="chart-heading">
+          <div>Line Chart <span class="highlight">Demo</span></div>
+          <div>Part <span class="highlight">2</span> of 3</div>
+        </div>
+        <div class="study-container">
+          <div class="chart-container">
+            <img src="../fakeimages/demo.png" alt="Demo Chart">
+          </div>
+          <div class="confidence-scale">
+            <p>How confident are you in your answer?</p>
+            <div class="likert-horizontal">
+              <label><input type="radio" name="demo-confidence" value="1"> 1</label>
+              <label><input type="radio" name="demo-confidence" value="2"> 2</label>
+              <label><input type="radio" name="demo-confidence" value="3"> 3</label>
+              <label><input type="radio" name="demo-confidence" value="4"> 4</label>
+              <label><input type="radio" name="demo-confidence" value="5"> 5</label>
+            </div>
+            <div class="likert-labels">
+              <span>Not confident</span>
+              <span>Very confident</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="center-btn">
+        <button class="next-btn">Next</button>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step">
+      <div class="start-container1">
+        <div class="timer" data-duration="15">Time Left: 15.0s</div>
+        <div class="chart-heading">
+          <div>Line Chart <span class="highlight">Demo</span></div>
+          <div>Part <span class="highlight">3</span> of 3</div>
+        </div>
+        <div class="study-container">
+          <div class="chart-container">
+            <img src="../fakeimages/demo.png" alt="Demo Chart">
+          </div>
+          <div class="study-text">
+            <p>Describe the pattern in the chart below:</p>
+            <textarea id="demo-response" rows="4" cols="50" placeholder="Write your reasoning here..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="center-btn">
+        <a href="instructions.html"><button class="start-btn">Done</button></a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const demoSteps = document.querySelectorAll(".step");
+    const nextButtons = document.querySelectorAll(".next-btn");
+    const timers = document.querySelectorAll(".timer");
+
+    let currentStep = 0;
+
+    function startTimerForStep(stepIndex) {
+      const timerElement = timers[stepIndex];
+      const duration = parseFloat(timerElement.dataset.duration);
+      let timeLeft = duration;
+
+      timerElement.textContent = `Time Left: ${timeLeft.toFixed(1)}s`;
+
+      const interval = setInterval(() => {
+        timeLeft -= 0.1;
+        timerElement.textContent = `Time Left: ${timeLeft.toFixed(1)}s`;
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          moveToNextStep();
+        }
+      }, 100);
+
+      // Attach to window to clear on button click
+      window.demoTimer = interval;
+    }
+
+    function moveToNextStep() {
+      if (currentStep < demoSteps.length - 1) {
+        clearInterval(window.demoTimer);
+        demoSteps[currentStep].classList.remove("active");
+        currentStep++;
+        demoSteps[currentStep].classList.add("active");
+        startTimerForStep(currentStep);
+      }
+    }
+
+    nextButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        moveToNextStep();
+      });
+    });
+
+    // Start first timer
+    startTimerForStep(currentStep);
+  </script>
+</body>
+</html>
