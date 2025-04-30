@@ -51,7 +51,7 @@ for (let i = 0; i < totalCharts; i++) {
       </div>
     </div>
     <br>
-    <button class="next-btn">Next</button>
+    <button class="start-btn">Next</button>
   `;
   container.appendChild(trendStep);
   steps.push(trendStep);
@@ -85,7 +85,7 @@ for (let i = 0; i < totalCharts; i++) {
       </div>
     </div>
     <br>
-    <button class="next-btn">Next</button>
+    <button class="start-btn">Next</button>
   `;
   container.appendChild(confidenceStep);
   steps.push(confidenceStep);
@@ -111,7 +111,7 @@ for (let i = 0; i < totalCharts; i++) {
       </div>
     </div>
     <br>
-    <button class="next-btn">Next</button>
+    <button class="start-btn">Next</button>
   `;
   container.appendChild(textStep);
   steps.push(textStep);
@@ -160,7 +160,7 @@ function moveToNextStep(index) {
   startTimer(index + 1);
 }
 
-document.querySelectorAll('.next-btn').forEach((button, index) => {
+document.querySelectorAll('.start-btn').forEach((button, index) => {
   button.addEventListener('click', () => {
     clearInterval(timer);
     moveToNextStep(index);
