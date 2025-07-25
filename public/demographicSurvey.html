@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Line Chart Study - Survey</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="start-container">
+            <h1 style="margin-bottom: 10px;">Demographic Information</h1>
+
+            <div class="rad">
+                <!-- Gender -->
+                <p>What is your gender?</p>
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+                <label><input type="radio" name="gender" value="Prefer not to answer"> Prefer not to answer</label>
+                <br><br>
+
+                <!-- Age -->
+                <p>What is your age?</p>
+                <select id="age-dropdown" required>
+                    <option value="">Choose...</option>
+                </select>
+                <br><br>
+
+                <!-- Education -->
+                <p>What is the highest level of education you have completed?</p>
+                <label><input type="radio" name="education" value="High school diploma or equivalent" required> High
+                    school diploma or equivalent</label>
+                <label><input type="radio" name="education" value="Associate degree"> Associate degree</label>
+                <label><input type="radio" name="education" value="Bachelor's degree"> Bachelor's degree</label>
+                <label><input type="radio" name="education" value="Master's degree"> Master's degree</label>
+                <label><input type="radio" name="education" value="Doctoral degree or higher"> Doctoral degree or
+                    higher</label>
+                <br><br>
+
+                <!-- Profession -->
+                <p>What is your current profession?</p>
+                <select id="profession-dropdown" name="profession" required>
+                    <option value="">Choose...</option>
+                    <option value="Student">Student</option>
+                    <option value="Academic / Research">Academic / Research</option>
+                    <option value="Tech / Engineering">Tech / Engineering</option>
+                    <option value="Business / Management">Business / Management</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to answer">Prefer not to answer</option>
+                </select>
+
+                <!-- Other Profession -->
+                <div id="other-profession-container" style="display: none; margin-top: 10px;">
+                    <label for="other-profession">Please specify:</label><br>
+                    <input style="padding: 5px;" type="text" id="other-profession" name="other-profession"
+                        placeholder="Enter your profession">
+                </div>
+                <br><br>
+
+                <!-- Visualization Familiarity -->
+                <p>How familiar are you with visualizations? (1 is not familiar at all, 10 is extremely familiar)</p>
+                <div>
+                    <label><input type="radio" name="visualization" value="1" required> 1</label>
+                    <label><input type="radio" name="visualization" value="2"> 2</label>
+                    <label><input type="radio" name="visualization" value="3"> 3</label>
+                    <label><input type="radio" name="visualization" value="4"> 4</label>
+                    <label><input type="radio" name="visualization" value="5"> 5</label>
+                    <label><input type="radio" name="visualization" value="6"> 6</label>
+                    <label><input type="radio" name="visualization" value="7"> 7</label>
+                    <label><input type="radio" name="visualization" value="8"> 8</label>
+                    <label><input type="radio" name="visualization" value="9"> 9</label>
+                    <label><input type="radio" name="visualization" value="10"> 10</label>
+                </div>
+                <br>
+            </div>
+
+            <!-- Next Button -->
+            <button class="start-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // Populate age dropdown
+        const ageDropdown = document.getElementById("age-dropdown");
+        for (let age = 18; age <= 65; age++) {
+            const option = document.createElement("option");
+            option.value = age;
+            option.textContent = age;
+            ageDropdown.appendChild(option);
+        }
+
+        // Show/hide "Other" profession field
+        const professionDropdown = document.getElementById('profession-dropdown');
+        const otherContainer = document.getElementById('other-profession-container');
+        const otherInput = document.getElementById('other-profession');
+
+        professionDropdown.addEventListener('change', function () {
+            if (this.value === 'Other') {
+                otherContainer.style.display = 'block';
+            } else {
+                otherContainer.style.display = 'none';
+                otherInput.value = '';
+                otherInput.classList.remove("shake");
+            }
+        });
+
+        // Form validation and shake on error
+        document.querySelector(".start-btn").addEventListener("click", function (e) {
+            e.preventDefault(); // prevent default button behavior
+
+            const requiredFields = [
+                document.querySelector('input[name="gender"]:checked'),
+                document.getElementById("age-dropdown"),
+                document.querySelector('input[name="education"]:checked'),
+                document.getElementById("profession-dropdown"),
+                document.querySelector('input[name="visualization"]:checked')
+            ];
+
+            let valid = true;
+
+            requiredFields.forEach(field => {
+                if (field === null || (field.tagName === 'SELECT' && field.value === '')) {
+                    valid = false;
+                    if (field && field.classList) {
+                        field.classList.add("shake");
+                        setTimeout(() => field.classList.remove("shake"), 400);
+                    }
+                }
+            });
+
+            if (professionDropdown.value === "Other" && otherInput.value.trim() === "") {
+                valid = false;
+                otherInput.classList.add("shake");
+                setTimeout(() => otherInput.classList.remove("shake"), 400);
+            }
+
+            if (valid) {
+                // Build the demographic object
+                const demographicData = {
+                    gender: document.querySelector('input[name="gender"]:checked').value,
+                    age: document.getElementById("age-dropdown").value,
+                    education: document.querySelector('input[name="education"]:checked').value,
+                    profession: professionDropdown.value === "Other" ? otherInput.value.trim() : professionDropdown.value,
+                    visualization: document.querySelector('input[name="visualization"]:checked').value
+                };
+
+                // Save to localStorage
+                localStorage.setItem("participantData", JSON.stringify({
+                    demographic: demographicData,
+                    responses: [] // we'll fill this later in study.html
+                }));
+
+                // Redirect to instructions or study
+                window.location.href = 'instructions.html';
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: sans-serif;
+  }
+
+  p {
+    text-align: left;
+    font-size: large;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .study-container {
+  position: relative; /* So the h1 positions relative to this container */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.chart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin-bottom: 100px;
+  /* margin-top: 0px; */
+  padding: 0 10px;
+}
+
+
+
+.chart-container {
+  margin-right: 50px;
+}
+
+#progress-bar-container {
+  width: 250px;                /* or adjust as needed */
+  height: 25px;
+  background-color: #e0e0e0;
+  position: fixed;
+  top: 20px;                   /* spacing from top */
+  right: 20px;                 /* spacing from right */
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #0d6efd;
+  transition: width 0.3s ease-in-out;
+  border-radius: 2px 0 0 2px;
+}
+
+
+
+  .confidence-scale {
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.confidence-scale label {
+  display: block;
+  margin-bottom: 6px;
+}
+.likert-horizontal {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.likert-horizontal label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: normal;
+  text-indent: 5px;
+}
+
+.likert-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 370px;
+  margin: auto;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.highlight {
+  color: #f502e9;
+  font-weight: bold;
+}
+  
+  .study-radio {
+    display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+  align-items: flex-start;
+  padding-left: 20px; 
+  }
+
+  .step {
+    display: none; /* Hide all by default */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .step.active {
+    display: flex; /* Show only the active section */
+  }
+  
+  .chart-placeholder {
+    width: 400px;
+    height: 400px;
+    background-color: #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #progress-indicator {
+    position: absolute;
+    top: 20px;
+    left: 90%;
+    transform: translateX(-50%);
+    font-size: 18px;
+  }
+  
+  .next-btn {
+    margin-top: 10px;
+    padding: 5px;
+
+    font-size: large;
+  }
+
+  .start-btn {
+    margin-top: 10px;
+    padding: 5px;
+    width: 300px;
+    font-size: large;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    border-radius:8px;
+  }
+
+  .start-container {
+    background-color: #eee;
+    border-radius: 20px;
+    padding: 60px 40px;
+    width: 1100px;
+    line-height: 1.6;
+    margin-top: 0px;
+    
+  }
+
+  .start-container1 {
+    /* background-color: #eee; */
+    border-radius: 20px;
+    padding: 60px 40px;
+    width: 1100px;
+    line-height: 1.6;
+    margin-top: 0px;
+    
+  }
+
+  label {
+    margin-right: 20px;
+  }
+
+  .rad {
+    text-align: left;
+  }
+  .rad p {
+    margin-bottom: 20px;
+  }
+
+  select {
+    width: 15%;
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  textarea {
+    resize: none;
+    margin-top: 5px;
+  }
+
+  /* Red border for invalid input */
+  textarea.invalid {
+    border: 2px solid red;
+  }
+  
+  /* Shake animation */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  textarea.shake {
+    animation: shake 0.3s;
+  }
+  input.shake {
+    animation: shake 0.3s;
+  }
+
+  .shake {
+    animation: shake 0.3s;
+    border: 2px solid red;
+  }
+
+  #timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
