@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Line Chart Study - Survey</title>
+    <title>HHLC User Study - Demographics</title>
 </head>
 
 <body>
@@ -14,23 +14,87 @@
             <h1 style="margin-bottom: 10px;">Demographic Information</h1>
 
             <div class="rad">
-                <!-- Gender -->
-                <p>What is your gender?</p>
-                <label><input type="radio" name="gender" value="Male" required> Male</label>
-                <label><input type="radio" name="gender" value="Female"> Female</label>
-                <label><input type="radio" name="gender" value="Other"> Other</label>
-                <label><input type="radio" name="gender" value="Prefer not to answer"> Prefer not to answer</label>
-                <br><br>
-
                 <!-- Age -->
-                <p>What is your age?</p>
+                <p>What is your age? <span style="color: red;">*</span></p>
                 <select id="age-dropdown" required>
                     <option value="">Choose...</option>
                 </select>
                 <br><br>
 
+                <!-- Profession -->
+                <p>What is your current profession? <span style="color: red;">*</span></p>
+                <select id="profession-dropdown" name="profession" required>
+                    <option value="">Choose...</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="Academic / Research">Academic / Research</option>
+                    <option value="Administrative / Clerical">Administrative / Clerical</option>
+                    <option value="Advertising / Public Relations">Advertising / Public Relations</option>
+                    <option value="Agriculture / Forestry">Agriculture / Forestry</option>
+                    <option value="Architecture">Architecture</option>
+                    <option value="Arts & Design">Arts & Design</option>
+                    <option value="Bioinformatics">Bioinformatics</option>
+                    <option value="Biology / Life Sciences">Biology / Life Sciences</option>
+                    <option value="Business Management">Business Management</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Computer Science / Software Development">Computer Science / Software Development</option>
+                    <option value="Construction / Trades">Construction / Trades</option>
+                    <option value="Customer Service">Customer Service</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Data Science / Analytics">Data Science / Analytics</option>
+                    <option value="Dentistry">Dentistry</option>
+                    <option value="Education – Primary / Secondary">Education – Primary / Secondary</option>
+                    <option value="Education – Higher Education / University">Education – Higher Education / University</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Environmental Science">Environmental Science</option>
+                    <option value="Finance / Banking">Finance / Banking</option>
+                    <option value="Geography / GIS">Geography / GIS</option>
+                    <option value="Graphic Design">Graphic Design</option>
+                    <option value="Healthcare – Nursing">Healthcare – Nursing</option>
+                    <option value="Healthcare – Physician / Specialist">Healthcare – Physician / Specialist</option>
+                    <option value="Healthcare">Healthcare (General)</option>
+                    <option value="Hospitality / Tourism">Hospitality / Tourism</option>
+                    <option value="Human Resources">Human Resources</option>
+                    <option value="Industrial Engineering">Industrial Engineering</option>
+                    <option value="Information Technology (IT Support, Admin)">Information Technology (IT Support, Admin)</option>
+                    <option value="Journalism / Media">Journalism / Media</option>
+                    <option value="Law / Legal Services">Law / Legal Services</option>
+                    <option value="Logistics / Supply Chain">Logistics / Supply Chain</option>
+                    <option value="Marketing / Communications">Marketing / Communications</option>
+                    <option value="Mathematics / Statistics">Mathematics / Statistics</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Military / Defense">Military / Defense</option>
+                    <option value="Non-Profit / NGO Sector">Non-Profit / NGO Sector</option>
+                    <option value="Pharmacology / Pharmacy">Pharmacology / Pharmacy</option>
+                    <option value="Physics / Physical Sciences">Physics / Physical Sciences</option>
+                    <option value="Policy / Public Administration">Policy / Public Administration</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Quality Assurance / Testing">Quality Assurance / Testing</option>
+                    <option value="Research – Social Sciences">Research – Social Sciences</option>
+                    <option value="Research – STEM">Research – STEM</option>
+                    <option value="Retail / Sales">Retail / Sales</option>
+                    <option value="Scientific Research">Scientific Research</option>
+                    <option value="Social Work">Social Work</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="Student">Student</option>
+                    <option value="Tech / Engineering">Tech / Engineering (General)</option>
+                    <option value="Transportation / Aviation">Transportation / Aviation</option>
+                    <option value="Urban Planning">Urban Planning</option>
+                    <option value="UX / UI / Product Design">UX / UI / Product Design</option>
+                    <option value="Veterinary Medicine">Veterinary Medicine</option>
+                    <option value="Visual Data Communication">Visual Data Communication</option>
+                    <option value="Other">Other (please specify)</option>
+                </select>
+
+                <!-- Other Profession -->
+                <div id="other-profession-container" style="display: none; margin-top: 10px;">
+                    <label for="other-profession">Please specify: <span style="color: red;">*</span></label><br>
+                    <input style="padding: 5px;" type="text" id="other-profession" name="other-profession"
+                        placeholder="Enter your profession">
+                </div>
+                <br><br>
+
                 <!-- Education -->
-                <p>What is the highest level of education you have completed?</p>
+                <p>What is the highest level of education you have completed? <span style="color: red;">*</span></p>
                 <label><input type="radio" name="education" value="High school diploma or equivalent" required> High
                     school diploma or equivalent</label>
                 <label><input type="radio" name="education" value="Associate degree"> Associate degree</label>
@@ -40,40 +104,126 @@
                     higher</label>
                 <br><br>
 
-                <!-- Profession -->
-                <p>What is your current profession?</p>
-                <select id="profession-dropdown" name="profession" required>
-                    <option value="">Choose...</option>
-                    <option value="Student">Student</option>
-                    <option value="Academic / Research">Academic / Research</option>
-                    <option value="Tech / Engineering">Tech / Engineering</option>
-                    <option value="Business / Management">Business / Management</option>
-                    <option value="Healthcare">Healthcare</option>
-                    <option value="Other">Other</option>
-                    <option value="Prefer not to answer">Prefer not to answer</option>
-                </select>
-
-                <!-- Other Profession -->
-                <div id="other-profession-container" style="display: none; margin-top: 10px;">
-                    <label for="other-profession">Please specify:</label><br>
-                    <input style="padding: 5px;" type="text" id="other-profession" name="other-profession"
-                        placeholder="Enter your profession">
+                <!-- Visualization Experience -->
+                <p>How familiar are you with interpreting graphs and data visualizations? <span style="color: red;">*</span></p>
+                <p style="font-size: 14px; color: #666; margin-top: 5px;">(1 = Not familiar at all, 5 = Extremely familiar)</p>
+                <div>
+                    <label><input type="radio" name="visualization" value="1" required> 1 - Not familiar at all</label>
+                    <label><input type="radio" name="visualization" value="2"> 2 - Slightly familiar</label>
+                    <label><input type="radio" name="visualization" value="3"> 3 - Moderately familiar</label>
+                    <label><input type="radio" name="visualization" value="4"> 4 - Very familiar</label>
+                    <label><input type="radio" name="visualization" value="5"> 5 - Extremely familiar</label>
                 </div>
                 <br><br>
 
-                <!-- Visualization Familiarity -->
-                <p>How familiar are you with visualizations? (1 is not familiar at all, 10 is extremely familiar)</p>
+                <!-- Data Visualization Background -->
+                <p>How would you describe your background or experience with data visualizations? <span style="color: red;">*</span></p>
+                <div class="background-options">
+                    <label><input type="radio" name="visualizationBackground" value="No formal exposure" required> 
+                        <div class="option-content">
+                            <strong>No formal exposure</strong><br>
+                            <span class="option-description">I have not received training or regularly encountered data visualizations.</span>
+                        </div>
+                    </label>
+                    
+                    <label><input type="radio" name="visualizationBackground" value="Basic exposure"> 
+                        <div class="option-content">
+                            <strong>Basic exposure</strong><br>
+                            <span class="option-description">I occasionally see charts/graphs in media or reports but do not interpret them deeply.</span>
+                        </div>
+                    </label>
+                    
+                    <label><input type="radio" name="visualizationBackground" value="Moderate exposure"> 
+                        <div class="option-content">
+                            <strong>Moderate exposure</strong><br>
+                            <span class="option-description">I interact with visualizations (e.g., Excel charts, dashboards) as part of my work or study, but not in-depth.</span>
+                        </div>
+                    </label>
+                    
+                    <label><input type="radio" name="visualizationBackground" value="Trained in basic data visualization"> 
+                        <div class="option-content">
+                            <strong>Trained in basic data visualization</strong><br>
+                            <span class="option-description">I have taken at least one course or workshop on reading or designing data visualizations.</span>
+                        </div>
+                    </label>
+                    
+                    <label><input type="radio" name="visualizationBackground" value="Frequent user of visual data"> 
+                        <div class="option-content">
+                            <strong>Frequent user of visual data</strong><br>
+                            <span class="option-description">I regularly analyze or create visualizations in academic, professional, or research contexts.</span>
+                        </div>
+                    </label>
+                    
+                    <label><input type="radio" name="visualizationBackground" value="Expert / Professional visualization designer or analyst"> 
+                        <div class="option-content">
+                            <strong>Expert / Professional visualization designer or analyst</strong><br>
+                            <span class="option-description">I design complex data visualizations or teach others how to use and interpret them.</span>
+                        </div>
+                    </label>
+                </div>
+                <br><br>
+
+                <!-- Visual Impairments -->
+                <p>Do you have any visual impairments or color vision deficiencies that affect how you view charts or graphics? <span style="color: red;">*</span></p>
                 <div>
-                    <label><input type="radio" name="visualization" value="1" required> 1</label>
-                    <label><input type="radio" name="visualization" value="2"> 2</label>
-                    <label><input type="radio" name="visualization" value="3"> 3</label>
-                    <label><input type="radio" name="visualization" value="4"> 4</label>
-                    <label><input type="radio" name="visualization" value="5"> 5</label>
-                    <label><input type="radio" name="visualization" value="6"> 6</label>
-                    <label><input type="radio" name="visualization" value="7"> 7</label>
-                    <label><input type="radio" name="visualization" value="8"> 8</label>
-                    <label><input type="radio" name="visualization" value="9"> 9</label>
-                    <label><input type="radio" name="visualization" value="10"> 10</label>
+                    <label><input type="radio" name="visualImpairment" value="No" required> No</label>
+                    <label><input type="radio" name="visualImpairment" value="Yes - Color vision deficiency"> Yes - Color vision deficiency (color blindness)</label>
+                    <label><input type="radio" name="visualImpairment" value="Yes - Visual impairment"> Yes - Visual impairment (low vision, etc.)</label>
+                    <label><input type="radio" name="visualImpairment" value="Yes - Other"> Yes - Other</label>
+                    <label><input type="radio" name="visualImpairment" value="Prefer not to answer"> Prefer not to answer</label>
+                </div>
+                <br><br>
+
+                <!-- Specific Chart Type Familiarity -->
+                <p><strong>Please rate your familiarity with each type of visualization:</strong></p>
+                <p style="font-size: 14px; color: #666; margin-bottom: 20px;">(1 = Not familiar at all, 5 = Extremely familiar)</p>
+                
+                <!-- Bar Charts -->
+                <div class="chart-familiarity">
+                    <p>Bar Charts <span style="color: red;">*</span></p>
+                    <div class="familiarity-scale">
+                        <label><input type="radio" name="barCharts" value="1" required> 1</label>
+                        <label><input type="radio" name="barCharts" value="2"> 2</label>
+                        <label><input type="radio" name="barCharts" value="3"> 3</label>
+                        <label><input type="radio" name="barCharts" value="4"> 4</label>
+                        <label><input type="radio" name="barCharts" value="5"> 5</label>
+                    </div>
+                </div>
+
+                <!-- Line Charts -->
+                <div class="chart-familiarity">
+                    <p>Line Charts <span style="color: red;">*</span></p>
+                    <div class="familiarity-scale">
+                        <label><input type="radio" name="lineCharts" value="1" required> 1</label>
+                        <label><input type="radio" name="lineCharts" value="2"> 2</label>
+                        <label><input type="radio" name="lineCharts" value="3"> 3</label>
+                        <label><input type="radio" name="lineCharts" value="4"> 4</label>
+                        <label><input type="radio" name="lineCharts" value="5"> 5</label>
+                    </div>
+                </div>
+
+                <!-- Scatterplots -->
+                <div class="chart-familiarity">
+                    <p>Scatterplots <span style="color: red;">*</span></p>
+                    <div class="familiarity-scale">
+                        <label><input type="radio" name="scatterplots" value="1" required> 1</label>
+                        <label><input type="radio" name="scatterplots" value="2"> 2</label>
+                        <label><input type="radio" name="scatterplots" value="3"> 3</label>
+                        <label><input type="radio" name="scatterplots" value="4"> 4</label>
+                        <label><input type="radio" name="scatterplots" value="5"> 5</label>
+                    </div>
+                </div>
+
+                <!-- Geographical Maps -->
+                <div class="chart-familiarity">
+                    <p>Geographical Maps <span style="color: red;">*</span></p>
+                    <div class="familiarity-scale">
+                        <label><input type="radio" name="geographicalMaps" value="1" required> 1</label>
+                        <label><input type="radio" name="geographicalMaps" value="2"> 2</label>
+                        <label><input type="radio" name="geographicalMaps" value="3"> 3</label>
+                        <label><input type="radio" name="geographicalMaps" value="4"> 4</label>
+                        <label><input type="radio" name="geographicalMaps" value="5"> 5</label>
+                    </div>
                 </div>
                 <br>
             </div>
@@ -113,14 +263,20 @@
             e.preventDefault(); // prevent default button behavior
 
             const requiredFields = [
-                document.querySelector('input[name="gender"]:checked'),
                 document.getElementById("age-dropdown"),
                 document.querySelector('input[name="education"]:checked'),
                 document.getElementById("profession-dropdown"),
-                document.querySelector('input[name="visualization"]:checked')
+                document.querySelector('input[name="visualization"]:checked'),
+                document.querySelector('input[name="visualizationBackground"]:checked'),
+                document.querySelector('input[name="visualImpairment"]:checked'),
+                document.querySelector('input[name="barCharts"]:checked'),
+                document.querySelector('input[name="lineCharts"]:checked'),
+                document.querySelector('input[name="scatterplots"]:checked'),
+                document.querySelector('input[name="geographicalMaps"]:checked')
             ];
 
             let valid = true;
+            let firstInvalidField = null;
 
             requiredFields.forEach(field => {
                 if (field === null || (field.tagName === 'SELECT' && field.value === '')) {
@@ -128,6 +284,7 @@
                     if (field && field.classList) {
                         field.classList.add("shake");
                         setTimeout(() => field.classList.remove("shake"), 400);
+                        if (!firstInvalidField) firstInvalidField = field;
                     }
                 }
             });
@@ -136,29 +293,39 @@
                 valid = false;
                 otherInput.classList.add("shake");
                 setTimeout(() => otherInput.classList.remove("shake"), 400);
+                if (!firstInvalidField) firstInvalidField = otherInput;
             }
 
-            if (valid) {
-                // Build the demographic object
-                const demographicData = {
-                    gender: document.querySelector('input[name="gender"]:checked').value,
-                    age: document.getElementById("age-dropdown").value,
-                    education: document.querySelector('input[name="education"]:checked').value,
-                    profession: professionDropdown.value === "Other" ? otherInput.value.trim() : professionDropdown.value,
-                    visualization: document.querySelector('input[name="visualization"]:checked').value
-                };
-
-                // Save to localStorage
-                localStorage.setItem("participantData", JSON.stringify({
-                    demographic: demographicData,
-                    responses: [] // we'll fill this later in study.html
-                }));
-
-                // Redirect to instructions or study
-                window.location.href = 'instructions.html';
+            if (!valid) {
+                alert("Please fill in all required fields (marked with *)");
+                if (firstInvalidField) firstInvalidField.focus();
+                return;
             }
 
+            // Build the demographic object
+            const demographicData = {
+                age: document.getElementById("age-dropdown").value,
+                education: document.querySelector('input[name="education"]:checked').value,
+                profession: professionDropdown.value === "Other" ? otherInput.value.trim() : professionDropdown.value,
+                visualization: document.querySelector('input[name="visualization"]:checked').value,
+                visualizationBackground: document.querySelector('input[name="visualizationBackground"]:checked').value,
+                visualImpairment: document.querySelector('input[name="visualImpairment"]:checked').value,
+                chartFamiliarity: {
+                    barCharts: document.querySelector('input[name="barCharts"]:checked').value,
+                    lineCharts: document.querySelector('input[name="lineCharts"]:checked').value,
+                    scatterplots: document.querySelector('input[name="scatterplots"]:checked').value,
+                    geographicalMaps: document.querySelector('input[name="geographicalMaps"]:checked').value
+                }
+            };
 
+            // Save to localStorage
+            localStorage.setItem("participantData", JSON.stringify({
+                demographic: demographicData,
+                responses: [] // we'll fill this later in study.html
+            }));
+
+            // Redirect to instructions or study
+            window.location.href = 'instructions.html';
         });
     </script>
 </body>
