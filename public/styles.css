@@ -6,12 +6,28 @@
   
   body, html {
     height: 100%;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+
+  /* Ensure all headings are plain */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+  }
+
+  /* Ensure all text elements are plain */
+  strong, b {
+    font-weight: normal;
   }
 
   p {
     text-align: left;
-    font-size: large;
+    font-size: 16px;
+    font-weight: normal;
   }
   
   .container {
@@ -38,8 +54,8 @@
   position: fixed;
   top: 55px;
   left: 20px;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: normal;
   color: #333;
   background-color: rgba(255, 255, 255, 0.95);
   padding: 8px 15px;
@@ -53,8 +69,8 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  font-size: 1.6em;
-  font-weight: bold;
+  font-size: 1.2em;
+  font-weight: normal;
   margin-bottom: 100px;
   /* margin-top: 0px; */
   padding: 0 10px;
@@ -69,9 +85,8 @@
   justify-content: center;
   align-items: center;
   margin-right: 50px;
-  border: 2px solid #ddd;
   border-radius: 8px;
-  background-color: #fafafa;
+  background-color: white;
   overflow: hidden;
   position: relative;
   cursor: grab;
@@ -93,10 +108,34 @@
   pointer-events: none;
 }
 
-.zoom-instructions {
+.chart-lasso-canvas {
   position: absolute;
-  bottom: 5px;
-  left: 10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  z-index: 5;
+}
+
+/* Lasso drawing cursor/tooltip */
+.chart-lasso-canvas.lasso-drawing {
+  cursor: crosshair; /* fallback to crosshair/pen-like */
+}
+
+.lasso-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 9999;
+  transform: translate(-50%, -150%);
+}
+
+.zoom-instructions {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 5px 8px;
@@ -104,12 +143,10 @@
   font-size: 11px;
   opacity: 0.8;
   pointer-events: none;
+  white-space: nowrap;
 }
 
 .reset-btn {
-  position: absolute;
-  top: 5px;
-  right: 10px;
   width: 60px;
   height: 30px;
   border: none;
@@ -118,9 +155,114 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   cursor: pointer;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: normal;
   transition: all 0.2s ease;
-  z-index: 10;
+}
+
+.chart-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chart-controls .reset-btn {
+  display: none;
+}
+
+/* Difficulty slider container */
+.difficulty-slider-container {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.difficulty-slider-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Main slider styling to match the image */
+.difficulty-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #e9ecef 0%, #e9ecef 100%);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 15px 0;
+}
+
+.difficulty-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #007cba;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.difficulty-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #007cba;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Slider labels positioned below the slider */
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #666;
+}
+
+.label-left, .label-right {
+  text-align: center;
+  font-weight: normal;
+}
+
+.label-center {
+  text-align: center;
+  font-weight: normal;
+}
+
+.label-left small, .label-right small {
+  display: block;
+  font-size: 14px;
+  color: #888;
+  margin-top: 2px;
+}
+
+/* Current value display */
+.slider-value-display {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.current-value {
+  font-size: 24px;
+  font-weight: normal;
+  color: #007cba;
+  background-color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #007cba;
+  min-width: 50px;
+  display: inline-block;
 }
 
 .reset-btn:hover {
@@ -248,15 +390,16 @@
   .next-btn {
     margin-top: 10px;
     padding: 5px;
-
-    font-size: large;
+    font-size: 16px;
+    font-weight: normal;
   }
 
   .start-btn {
     margin-top: 10px;
     padding: 5px;
     width: 300px;
-    font-size: large;
+    font-size: 16px;
+    font-weight: normal;
     color: #fff;
     background-color: #0d6efd;
     border-color: #0d6efd;
@@ -356,7 +499,7 @@
 .study-question p {
   font-size: 18px;
   margin-bottom: 15px;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .study-question textarea {
@@ -430,46 +573,248 @@
   color: red !important;
 }
 
-/* Chart familiarity section styles */
+/* Chart familiarity section styles with sliders */
 .chart-familiarity {
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   border-left: 3px solid #007cba;
-  padding-left: 10px;
+  padding-left: 15px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
 }
 
 .chart-familiarity p {
-  margin-bottom: 3px;
+  margin-bottom: 10px;
   font-weight: bold;
   font-size: 16px;
 }
 
-.familiarity-scale {
-  display: flex;
-  gap: 10px;
-  margin: 2px 0;
-}
-
-.familiarity-scale label {
+.familiarity-slider-container {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.slider-group {
+  display: flex;
   align-items: center;
+  gap: 15px;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #666;
+  margin-top: 8px;
+  max-width: 250px;
+}
+
+.slider-labels span {
+  text-align: center;
+  flex: 1;
+}
+
+/* Custom slider styling */
+.familiarity-slider {
+  flex: 1;
+  max-width: 250px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #ddd;
+  border-radius: 3px;
+  outline: none;
+  transition: background 0.2s;
+  background-image: 
+    linear-gradient(to right, 
+      #ddd 0%, #ddd 24%, transparent 24%, transparent 26%,
+      #ddd 26%, #ddd 49%, transparent 49%, transparent 51%,
+      #ddd 51%, #ddd 74%, transparent 74%, transparent 76%,
+      #ddd 76%, #ddd 100%);
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.familiarity-slider::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: 
+    repeating-linear-gradient(to right,
+      transparent 0%,
+      transparent calc(25% - 1px),
+      #999 calc(25% - 1px),
+      #999 calc(25% + 1px),
+      transparent calc(25% + 1px)
+    );
+  pointer-events: none;
+}
+
+.familiarity-slider:hover {
+  background-image: 
+    linear-gradient(to right, 
+      #bbb 0%, #bbb 24%, transparent 24%, transparent 26%,
+      #bbb 26%, #bbb 49%, transparent 49%, transparent 51%,
+      #bbb 51%, #bbb 74%, transparent 74%, transparent 76%,
+      #bbb 76%, #bbb 100%);
+}
+
+.familiarity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #007cba;
+  border-radius: 50%;
   cursor: pointer;
-  padding: 5px 8px;
-  border-radius: 5px;
-  transition: background-color 0.2s;
+  transition: background 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.familiarity-slider::-webkit-slider-thumb:hover {
+  background: #005a87;
+}
+
+.familiarity-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #007cba;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.familiarity-slider::-moz-range-thumb:hover {
+  background: #005a87;
+}
+
+.slider-value {
+  min-width: 30px;
   font-weight: bold;
+  color: #007cba;
+  text-align: center;
 }
 
-.familiarity-scale label:hover {
-  background-color: #f0f0f0;
+/* Round radio button styling */
+.radio-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0;
 }
 
-.familiarity-scale input[type="radio"] {
-  margin-bottom: 5px;
-  transform: scale(1.1);
+.radio-options label {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 5px 0;
 }
 
-/* Background options styling */
+.radio-options input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #007cba;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.radio-options input[type="radio"]:checked {
+  background-color: #007cba;
+  border-color: #007cba;
+}
+
+.radio-options input[type="radio"]:checked::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio-options input[type="radio"]:hover {
+  border-color: #005a87;
+  box-shadow: 0 0 5px rgba(0, 124, 186, 0.3);
+}
+
+.radio-options span {
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* Rectangular checkbox styling */
+.checkbox-options input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #007cba;
+  border-radius: 3px;
+  background-color: white;
+  margin-right: 10px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkbox-options input[type="radio"]:checked {
+  background-color: #007cba;
+  position: relative;
+}
+
+.checkbox-options input[type="radio"]:checked::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-options input[type="radio"]:hover {
+  border-color: #005a87;
+  box-shadow: 0 0 5px rgba(0, 124, 186, 0.3);
+}
+
+.checkbox-options label {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fafafa;
+}
+
+.checkbox-options label:hover {
+  border-color: #007cba;
+  background-color: #f0f8ff;
+}
+
+/* Background options styling with rectangular checkboxes */
 .background-options {
   display: flex;
   flex-direction: column;
@@ -494,10 +839,40 @@
 }
 
 .background-options input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #007cba;
+  border-radius: 3px;
+  background-color: white;
   margin-right: 10px;
   margin-top: 2px;
-  transform: scale(1.2);
   flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.background-options input[type="radio"]:checked {
+  background-color: #007cba;
+  position: relative;
+}
+
+.background-options input[type="radio"]:checked::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.background-options input[type="radio"]:hover {
+  border-color: #005a87;
+  box-shadow: 0 0 5px rgba(0, 124, 186, 0.3);
 }
 
 .option-content {
@@ -528,4 +903,28 @@
   line-height: 1.4;
   margin-top: 2px;
   display: block;
+}
+
+/* Participant ID display for video recording */
+#participant-id-display {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: normal;
+  z-index: 1000;
+  opacity: 0.8;
+  user-select: text;
+  pointer-events: auto;
+  cursor: text;
+}
+
+#participant-id-display:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.9);
 }

@@ -1,0 +1,212 @@
+[
+  {
+    "timestamp": 1755058494025,
+    "participantId": "participant_1755058481586_3kixoz800",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1755058709049,
+    "participantId": "participant_1755058481586_3kixoz800",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1755059172771,
+    "participantId": "participant_1755059162476_yu622yy83",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1755059177930,
+    "participantId": "participant_1755059162476_yu622yy83",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1756747378300,
+    "participantId": "participant_1756747362149_43yc6mrpp",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1756747390926,
+    "participantId": "participant_1756747362149_43yc6mrpp",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1756747897268,
+    "participantId": "participant_1756747884941_kdbe5si01",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1756747902782,
+    "participantId": "participant_1756747884941_kdbe5si01",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1756900134429,
+    "participantId": "participant_1756848162580_ljvvicl1d",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1756900139156,
+    "participantId": "participant_1756848162580_ljvvicl1d",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1756915026020,
+    "participantId": "participant_1756915012173_tyb227db2",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1756915030739,
+    "participantId": "participant_1756915012173_tyb227db2",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757005741786,
+    "participantId": "participant_1757005474756_cwza9nljl",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757005819118,
+    "participantId": "participant_1757005474756_cwza9nljl",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757020264668,
+    "participantId": "participant_1757020174306_kci0kpqg7",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757020335965,
+    "participantId": "participant_1757020174306_kci0kpqg7",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757312415849,
+    "participantId": "participant_1757312385211_wc8e4emkr",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757312422852,
+    "participantId": "participant_1757312385211_wc8e4emkr",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757350271407,
+    "participantId": "participant_1757350070550_lrpjo04mf",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757350290521,
+    "participantId": "participant_1757350070550_lrpjo04mf",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757350310323,
+    "participantId": "participant_1757350070550_lrpjo04mf",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757350658962,
+    "participantId": "participant_1757350070550_lrpjo04mf",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757523267818,
+    "participantId": "participant_1757523125088_x4q8861xf",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757523285746,
+    "participantId": "participant_1757523125088_x4q8861xf",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757810917613,
+    "participantId": "participant_1757803654708_qwdqlw46u",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757810938597,
+    "participantId": "participant_1757803654708_qwdqlw46u",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757826583336,
+    "participantId": "participant_1757826570596_5vzuz87rk",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757826591338,
+    "participantId": "participant_1757826570596_5vzuz87rk",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757827020405,
+    "participantId": "participant_1757827010551_ixu8h6hdv",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757827025317,
+    "participantId": "participant_1757827010551_ixu8h6hdv",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  }
+]

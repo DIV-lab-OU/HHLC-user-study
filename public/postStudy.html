@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HHLC User Study - Post-Study Questions</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="sessionManager.js"></script>
+    <style>
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .chart-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .chart-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .chart-checkbox {
+            margin-top: 8px;
+        }
+        .feedback-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+        .feedback-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="start-container">
+            <h1 style="margin-bottom: 20px;">Post-Study Questions</h1>
+            
+            <h2 style="margin-bottom: 15px;">Chart Recognition</h2>
+            <p style="margin-bottom: 20px; line-height: 1.6;">
+                Have you ever seen any of these visualizations before this study?<br>
+                Please check the box below any chart that you recognize from previous exposure (e.g., in news, reports, academic papers, etc.).
+            </p>
+            
+            <div id="chart-grid" class="chart-grid">
+                <!-- Charts will be dynamically populated here -->
+            </div>
+            
+            <div class="feedback-section">
+                <h2 style="margin-bottom: 15px;">Feedback</h2>
+                <p style="margin-bottom: 15px; line-height: 1.6;">
+                    Do you have any questions or feedback about this study?<br>
+                    Please share any thoughts, suggestions, or concerns you may have about the study design, instructions, or your experience.
+                </p>
+                <textarea 
+                    id="feedback-text" 
+                    class="feedback-textarea" 
+                    placeholder="Your feedback is valuable to us. Please share any comments, suggestions, or questions you have about the study...">
+                </textarea>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <button class="start-btn" onclick="submitPostStudyData()" style="padding: 12px 30px; font-size: 16px;">
+                    Complete Study
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let sessionManager;
+        let selectedCharts = [];
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Initialize session management
+            sessionManager = window.currentSession || new SessionManager();
+            const sessionValid = await sessionManager.ensureSession();
+            if (!sessionValid) {
+                alert('Session expired. Please restart the study.');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Load participant data to get their chart selection
+            const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
+            selectedCharts = participantData.selectedCharts || [];
+            
+            if (selectedCharts.length === 0) {
+                alert('No chart data found. Please restart the study.');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Populate the chart grid
+            populateChartGrid();
+        });
+        
+        function populateChartGrid() {
+            const chartGrid = document.getElementById('chart-grid');
+            chartGrid.innerHTML = '';
+            
+            selectedCharts.forEach((chartId, index) => {
+                const chartItem = document.createElement('div');
+                chartItem.className = 'chart-item';
+                chartItem.innerHTML = `
+                    <img src="images/${chartId}_chart.png" alt="Chart ${chartId}" loading="lazy">
+                    <div class="chart-checkbox">
+                        <label>
+                            <input type="checkbox" id="chart-${chartId}" name="recognizedCharts" value="${chartId}">
+                            Chart ${index + 1}
+                        </label>
+                    </div>
+                `;
+                chartGrid.appendChild(chartItem);
+            });
+        }
+        
+        async function submitPostStudyData() {
+            // Collect recognized charts
+            const recognizedCharts = [];
+            const checkboxes = document.querySelectorAll('input[name="recognizedCharts"]:checked');
+            checkboxes.forEach(checkbox => {
+                recognizedCharts.push(parseInt(checkbox.value));
+            });
+            
+            // Collect feedback
+            const feedback = document.getElementById('feedback-text').value.trim();
+            
+            // Create post-study data object
+            const postStudyData = {
+                recognizedCharts: recognizedCharts,
+                feedback: feedback,
+                completedAt: new Date().toISOString()
+            };
+            
+            // Get existing participant data
+            const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
+            
+            // Add post-study data to participant data
+            const finalData = {
+                ...participantData,
+                postStudy: postStudyData,
+                sessionId: sessionManager ? sessionManager.sessionId : `session_${Date.now()}`,
+                studyCompleteTimestamp: Date.now()
+            };
+            
+            // Submit to server
+            try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(finalData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Clear session and local storage
+                    if (sessionManager) {
+                        sessionManager.clearSession();
+                    }
+                    localStorage.removeItem("participantData");
+                    localStorage.removeItem("studyStartTime");
+                    
+                    // Show completion message
+                    document.querySelector('.start-container').innerHTML = `
+                        <div style="text-align: center; padding: 40px 20px;">
+                            <h1 style="color: #28a745; margin-bottom: 20px;">✓ Study Completed Successfully!</h1>
+                            <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">
+                                Thank you for participating in the HHLC User Study!
+                            </p>
+                            <p style="line-height: 1.6; color: #666;">
+                                Your responses have been submitted successfully. Your contribution will help advance research 
+                                in data visualization and human-computer interaction.
+                            </p>
+                            <p style="margin-top: 30px; color: #666;">
+                                You may now close this window.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting post-study data:', error);
+                alert('Error submitting data. Please try again or contact the researchers if the problem persists.');
+            }
+        }
+    </script>
+</body>
+</html>

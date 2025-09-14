@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>HHLC User Study - Demographics</title>
+    <script src="sessionManager.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="start-container">
-            <h1 style="margin-bottom: 10px;">Demographic Information</h1>
+            <h1 style="margin-bottom: 25px;">Demographic Information</h1>
 
-            <div class="rad">
+            <div class="rad" style="line-height: 1.6;">
                 <!-- Age -->
-                <p>What is your age? <span style="color: red;">*</span></p>
-                <select id="age-dropdown" required>
+                <p style="margin-bottom: 8px;">What is your age? <span style="color: red;">*</span></p>
+                <select id="age-dropdown" required style="margin-bottom: 20px;">
                     <option value="">Choose...</option>
                 </select>
-                <br><br>
 
                 <!-- Profession -->
-                <p>What is your current profession? <span style="color: red;">*</span></p>
-                <select id="profession-dropdown" name="profession" required>
+                <p style="margin-bottom: 8px;">What is your current profession? (Choose Other at the bottom if your profession is not in the list.) <span style="color: red;">*</span></p>
+                <select id="profession-dropdown" name="profession" required style="margin-bottom: 10px;">
                     <option value="">Choose...</option>
                     <option value="Accounting">Accounting</option>
                     <option value="Academic / Research">Academic / Research</option>
@@ -86,150 +86,201 @@
                 </select>
 
                 <!-- Other Profession -->
-                <div id="other-profession-container" style="display: none; margin-top: 10px;">
+                <div id="other-profession-container" style="display: none; margin-top: 10px; margin-bottom: 20px;">
                     <label for="other-profession">Please specify: <span style="color: red;">*</span></label><br>
-                    <input style="padding: 5px;" type="text" id="other-profession" name="other-profession"
+                    <input style="padding: 8px; margin-top: 5px; width: 300px;" type="text" id="other-profession" name="other-profession"
                         placeholder="Enter your profession">
                 </div>
-                <br><br>
 
                 <!-- Education -->
-                <p>What is the highest level of education you have completed? <span style="color: red;">*</span></p>
-                <label><input type="radio" name="education" value="High school diploma or equivalent" required> High
-                    school diploma or equivalent</label>
-                <label><input type="radio" name="education" value="Associate degree"> Associate degree</label>
-                <label><input type="radio" name="education" value="Bachelor's degree"> Bachelor's degree</label>
-                <label><input type="radio" name="education" value="Master's degree"> Master's degree</label>
-                <label><input type="radio" name="education" value="Doctoral degree or higher"> Doctoral degree or
-                    higher</label>
-                <br><br>
+                <p style="margin-bottom: 12px; margin-top: 20px;">What is the highest level of education you have completed? <span style="color: red;">*</span></p>
+                <div class="checkbox-options" style="margin-bottom: 25px;">
+                    <label><input type="radio" name="education" value="High school diploma or lower" required> High school diploma or lower</label>
+                    <label><input type="radio" name="education" value="Associate degree"> Associate degree</label>
+                    <label><input type="radio" name="education" value="Bachelor's degree"> Bachelor's degree</label>
+                    <label><input type="radio" name="education" value="Master's degree"> Master's degree</label>
+                    <label><input type="radio" name="education" value="Doctoral degree"> Doctoral degree</label>
+                </div>
 
-                <!-- Visualization Experience -->
-                <p>How familiar are you with interpreting graphs and data visualizations? <span style="color: red;">*</span></p>
-                <p style="font-size: 14px; color: #666; margin-top: 5px;">(1 = Not familiar at all, 5 = Extremely familiar)</p>
-                <div>
+                <!-- Visualization Experience
+                <p style="margin-bottom: 8px;">How familiar are you with interpreting graphs and data visualizations? <span style="color: red;">*</span></p>
+                <p style="font-size: 14px; color: #666; margin-top: 5px; margin-bottom: 12px;">(1 = Not familiar at all, 5 = Extremely familiar)</p>
+                <div class="checkbox-options" style="margin-bottom: 25px;">
                     <label><input type="radio" name="visualization" value="1" required> 1 - Not familiar at all</label>
                     <label><input type="radio" name="visualization" value="2"> 2 - Slightly familiar</label>
                     <label><input type="radio" name="visualization" value="3"> 3 - Moderately familiar</label>
                     <label><input type="radio" name="visualization" value="4"> 4 - Very familiar</label>
                     <label><input type="radio" name="visualization" value="5"> 5 - Extremely familiar</label>
-                </div>
-                <br><br>
+                </div> -->
 
                 <!-- Data Visualization Background -->
-                <p>How would you describe your background or experience with data visualizations? <span style="color: red;">*</span></p>
-                <div class="background-options">
-                    <label><input type="radio" name="visualizationBackground" value="No formal exposure" required> 
-                        <div class="option-content">
-                            <strong>No formal exposure</strong><br>
-                            <span class="option-description">I have not received training or regularly encountered data visualizations.</span>
-                        </div>
+                <p style="margin-bottom: 12px;">How would you describe your background or experience with data visualizations? <span style="color: red;">*</span></p>
+                <div class="radio-options" style="margin-bottom: 25px;">
+                    <label for="no-exposure" style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" id="no-exposure" name="data-viz-background" value="no-exposure" required style="margin-right: 8px; margin-top: 2px;">
+                        <span>No formal exposure (You've had little to no experience with data visualization beyond basic graphs you might encounter in everyday media.)</span>
                     </label>
-                    
-                    <label><input type="radio" name="visualizationBackground" value="Basic exposure"> 
-                        <div class="option-content">
-                            <strong>Basic exposure</strong><br>
-                            <span class="option-description">I occasionally see charts/graphs in media or reports but do not interpret them deeply.</span>
-                        </div>
-                    </label>
-                    
-                    <label><input type="radio" name="visualizationBackground" value="Moderate exposure"> 
-                        <div class="option-content">
-                            <strong>Moderate exposure</strong><br>
-                            <span class="option-description">I interact with visualizations (e.g., Excel charts, dashboards) as part of my work or study, but not in-depth.</span>
-                        </div>
-                    </label>
-                    
-                    <label><input type="radio" name="visualizationBackground" value="Trained in basic data visualization"> 
-                        <div class="option-content">
-                            <strong>Trained in basic data visualization</strong><br>
-                            <span class="option-description">I have taken at least one course or workshop on reading or designing data visualizations.</span>
-                        </div>
-                    </label>
-                    
-                    <label><input type="radio" name="visualizationBackground" value="Frequent user of visual data"> 
-                        <div class="option-content">
-                            <strong>Frequent user of visual data</strong><br>
-                            <span class="option-description">I regularly analyze or create visualizations in academic, professional, or research contexts.</span>
-                        </div>
-                    </label>
-                    
-                    <label><input type="radio" name="visualizationBackground" value="Expert / Professional visualization designer or analyst"> 
-                        <div class="option-content">
-                            <strong>Expert / Professional visualization designer or analyst</strong><br>
-                            <span class="option-description">I design complex data visualizations or teach others how to use and interpret them.</span>
-                        </div>
-                    </label>
-                </div>
-                <br><br>
 
-                <!-- Visual Impairments -->
-                <p>Do you have any visual impairments or color vision deficiencies that affect how you view charts or graphics? <span style="color: red;">*</span></p>
-                <div>
-                    <label><input type="radio" name="visualImpairment" value="No" required> No</label>
-                    <label><input type="radio" name="visualImpairment" value="Yes - Color vision deficiency"> Yes - Color vision deficiency (color blindness)</label>
-                    <label><input type="radio" name="visualImpairment" value="Yes - Visual impairment"> Yes - Visual impairment (low vision, etc.)</label>
-                    <label><input type="radio" name="visualImpairment" value="Yes - Other"> Yes - Other</label>
-                    <label><input type="radio" name="visualImpairment" value="Prefer not to answer"> Prefer not to answer</label>
+                    <label for="moderate-exposure" style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" id="moderate-exposure" name="data-viz-background" value="moderate-exposure" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Moderate exposure (You've occasionally encountered data visualizations and feel comfortable interpreting basic charts and graphs.)</span>
+                    </label>
+
+                    <label for="basic-training" style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" id="basic-training" name="data-viz-background" value="basic-training" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Trained in basic data visualization (You've received some formal or informal training in reading, interpreting, or creating data visualizations.)</span>
+                    </label>
+
+                    <label for="frequent-user" style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" id="frequent-user" name="data-viz-background" value="frequent-user" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Frequent user of visual data (You regularly work with or encounter data visualizations in your professional or academic work.)</span>
+                    </label>
+
+                    <label for="expert" style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" id="expert" name="data-viz-background" value="expert" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Expert / Professional visualization designer or analyst (You have advanced knowledge and experience in designing, creating, or analyzing data visualizations professionally.)</span>
+                    </label>
                 </div>
-                <br><br>
+              <!-- Visual Impairments -->
+                <p>Do you have any visual impairments or color vision deficiencies that affect how you view charts or graphics? <span style="color: red;">*</span></p>
+                <div class="radio-options">
+                    <label style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <input type="radio" name="visualImpairment" value="No" required style="margin-right: 8px;">
+                        <span>No</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <input type="radio" name="visualImpairment" value="Yes - Color vision deficiency" style="margin-right: 8px;">
+                        <span>Yes</span>
+                    </label>
+                </div>
+                <!-- Media Visualization Exposure -->
+                <p>How frequently do you encounter data visualizations (charts, graphs, maps) in media sources? <span style="color: red;">*</span></p>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Think about newspapers, magazines, online articles, social media, TV news, reports, etc.</p>
+                <div class="radio-options">
+                    <label style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" name="mediaVisualizationExposure" value="Never or rarely" required style="margin-right: 8px; margin-top: 2px;">
+                        <span>Never or rarely (I rarely encounter data visualizations in news, social media, or other media.)</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" name="mediaVisualizationExposure" value="Occasionally" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Occasionally (I see visualizations a few times per month in news, articles, or social media.)</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" name="mediaVisualizationExposure" value="Regularly" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Regularly (I encounter visualizations several times per week in the media I consume.)</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" name="mediaVisualizationExposure" value="Frequently" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Frequently (I see data visualizations almost daily in newspapers, online articles, reports, or social media.)</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                        <input type="radio" name="mediaVisualizationExposure" value="Very frequently" style="margin-right: 8px; margin-top: 2px;">
+                        <span>Very frequently (I actively seek out and regularly consume media rich in data visualizations such as data journalism, research reports, etc.)</span>
+                    </label>
+                </div>
+                <br>
+
+                            <!-- Helpfulness of Media Visualizations -->
+                <p>When reading media sources, how helpful do you find visualizations (charts, graphs, maps) that are part of a story? <span style="color: red;">*</span></p>
+                <p style="font-size: 14px; color: #666; margin-top: 5px;">(1 = Not helpful, 5 = Very helpful)</p>
+                <div class="familiarity-slider-container" style="max-width:360px; margin-bottom:16px;">
+                    <div class="slider-group">
+                        <input type="range" id="mediaVisualizationHelpfulness" name="mediaVisualizationHelpfulness" min="1" max="5" value="3" class="familiarity-slider" required oninput="updateSliderValue('mediaVisualizationHelpfulness', this.value)">
+                        <span class="slider-value" id="mediaVisualizationHelpfulness-value">3</span>
+                    </div>
+                    <div class="slider-labels">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                    </div>
+                </div>
 
                 <!-- Specific Chart Type Familiarity -->
-                <p><strong>Please rate your familiarity with each type of visualization:</strong></p>
+                <p>Please rate your familiarity with each type of visualization:</p>
                 <p style="font-size: 14px; color: #666; margin-bottom: 20px;">(1 = Not familiar at all, 5 = Extremely familiar)</p>
                 
                 <!-- Bar Charts -->
                 <div class="chart-familiarity">
                     <p>Bar Charts <span style="color: red;">*</span></p>
-                    <div class="familiarity-scale">
-                        <label><input type="radio" name="barCharts" value="1" required> 1</label>
-                        <label><input type="radio" name="barCharts" value="2"> 2</label>
-                        <label><input type="radio" name="barCharts" value="3"> 3</label>
-                        <label><input type="radio" name="barCharts" value="4"> 4</label>
-                        <label><input type="radio" name="barCharts" value="5"> 5</label>
+                    <div class="familiarity-slider-container">
+                        <div class="slider-group">
+                            <input type="range" id="barCharts" name="barCharts" min="1" max="5" value="3" class="familiarity-slider" required oninput="updateSliderValue('barCharts', this.value)">
+                            <span class="slider-value" id="barCharts-value">3</span>
+                        </div>
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Line Charts -->
                 <div class="chart-familiarity">
                     <p>Line Charts <span style="color: red;">*</span></p>
-                    <div class="familiarity-scale">
-                        <label><input type="radio" name="lineCharts" value="1" required> 1</label>
-                        <label><input type="radio" name="lineCharts" value="2"> 2</label>
-                        <label><input type="radio" name="lineCharts" value="3"> 3</label>
-                        <label><input type="radio" name="lineCharts" value="4"> 4</label>
-                        <label><input type="radio" name="lineCharts" value="5"> 5</label>
+                    <div class="familiarity-slider-container">
+                        <div class="slider-group">
+                            <input type="range" id="lineCharts" name="lineCharts" min="1" max="5" value="3" class="familiarity-slider" required oninput="updateSliderValue('lineCharts', this.value)">
+                            <span class="slider-value" id="lineCharts-value">3</span>
+                        </div>
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Scatterplots -->
                 <div class="chart-familiarity">
                     <p>Scatterplots <span style="color: red;">*</span></p>
-                    <div class="familiarity-scale">
-                        <label><input type="radio" name="scatterplots" value="1" required> 1</label>
-                        <label><input type="radio" name="scatterplots" value="2"> 2</label>
-                        <label><input type="radio" name="scatterplots" value="3"> 3</label>
-                        <label><input type="radio" name="scatterplots" value="4"> 4</label>
-                        <label><input type="radio" name="scatterplots" value="5"> 5</label>
+                    <div class="familiarity-slider-container">
+                        <div class="slider-group">
+                            <input type="range" id="scatterplots" name="scatterplots" min="1" max="5" value="3" class="familiarity-slider" required oninput="updateSliderValue('scatterplots', this.value)">
+                            <span class="slider-value" id="scatterplots-value">3</span>
+                        </div>
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Geographical Maps -->
                 <div class="chart-familiarity">
                     <p>Geographical Maps <span style="color: red;">*</span></p>
-                    <div class="familiarity-scale">
-                        <label><input type="radio" name="geographicalMaps" value="1" required> 1</label>
-                        <label><input type="radio" name="geographicalMaps" value="2"> 2</label>
-                        <label><input type="radio" name="geographicalMaps" value="3"> 3</label>
-                        <label><input type="radio" name="geographicalMaps" value="4"> 4</label>
-                        <label><input type="radio" name="geographicalMaps" value="5"> 5</label>
+                    <div class="familiarity-slider-container">
+                        <div class="slider-group">
+                            <input type="range" id="geographicalMaps" name="geographicalMaps" min="1" max="5" value="3" class="familiarity-slider" required oninput="updateSliderValue('geographicalMaps', this.value)">
+                            <span class="slider-value" id="geographicalMaps-value">3</span>
+                        </div>
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
                     </div>
                 </div>
                 <br>
             </div>
 
             <!-- Next Button -->
-            <button class="start-btn">Next</button>
+                  <button type="button" class="start-btn" onclick="submitDemographic()">Continue Experiment</button>
         </div>
     </div>
 
@@ -258,21 +309,35 @@
             }
         });
 
+        // Update slider value display
+        function updateSliderValue(sliderId, value) {
+            const valueElement = document.getElementById(sliderId + '-value');
+            if (valueElement) {
+                valueElement.textContent = value;
+            }
+        }
+
         // Form validation and shake on error
-        document.querySelector(".start-btn").addEventListener("click", function (e) {
+        document.querySelector(".start-btn").addEventListener("click", async function (e) {
             e.preventDefault(); // prevent default button behavior
+            
+            // Ensure we have a valid session
+            const sessionManager = window.currentSession || new SessionManager();
+            const sessionValid = await sessionManager.ensureSession();
+            if (!sessionValid) return;
 
             const requiredFields = [
                 document.getElementById("age-dropdown"),
                 document.querySelector('input[name="education"]:checked'),
                 document.getElementById("profession-dropdown"),
-                document.querySelector('input[name="visualization"]:checked'),
-                document.querySelector('input[name="visualizationBackground"]:checked'),
+                document.querySelector('input[name="data-viz-background"]:checked'),
+                document.querySelector('input[name="mediaVisualizationExposure"]:checked'),
                 document.querySelector('input[name="visualImpairment"]:checked'),
-                document.querySelector('input[name="barCharts"]:checked'),
-                document.querySelector('input[name="lineCharts"]:checked'),
-                document.querySelector('input[name="scatterplots"]:checked'),
-                document.querySelector('input[name="geographicalMaps"]:checked')
+                document.getElementById("mediaVisualizationHelpfulness"),
+                document.getElementById("barCharts"),
+                document.getElementById("lineCharts"),
+                document.getElementById("scatterplots"),
+                document.getElementById("geographicalMaps")
             ];
 
             let valid = true;
@@ -307,25 +372,30 @@
                 age: document.getElementById("age-dropdown").value,
                 education: document.querySelector('input[name="education"]:checked').value,
                 profession: professionDropdown.value === "Other" ? otherInput.value.trim() : professionDropdown.value,
-                visualization: document.querySelector('input[name="visualization"]:checked').value,
-                visualizationBackground: document.querySelector('input[name="visualizationBackground"]:checked').value,
+                dataVizBackground: document.querySelector('input[name="data-viz-background"]:checked').value,
+                mediaVisualizationExposure: document.querySelector('input[name="mediaVisualizationExposure"]:checked').value,
                 visualImpairment: document.querySelector('input[name="visualImpairment"]:checked').value,
+                mediaVisualizationHelpfulness: document.getElementById("mediaVisualizationHelpfulness").value,
                 chartFamiliarity: {
-                    barCharts: document.querySelector('input[name="barCharts"]:checked').value,
-                    lineCharts: document.querySelector('input[name="lineCharts"]:checked').value,
-                    scatterplots: document.querySelector('input[name="scatterplots"]:checked').value,
-                    geographicalMaps: document.querySelector('input[name="geographicalMaps"]:checked').value
+                    barCharts: document.getElementById("barCharts").value,
+                    lineCharts: document.getElementById("lineCharts").value,
+                    scatterplots: document.getElementById("scatterplots").value,
+                    geographicalMaps: document.getElementById("geographicalMaps").value
                 }
             };
 
-            // Save to localStorage
-            localStorage.setItem("participantData", JSON.stringify({
+            // Save to localStorage with session context
+            const participantData = {
+                participantId: sessionManager.getParticipantId(),
+                sessionStart: Date.now(),
                 demographic: demographicData,
                 responses: [] // we'll fill this later in study.html
-            }));
+            };
+            
+            localStorage.setItem("participantData", JSON.stringify(participantData));
 
-            // Redirect to instructions or study
-            window.location.href = 'instructions.html';
+            // Redirect to VL Test
+            window.location.href = 'vlTest.html';
         });
     </script>
 </body>
