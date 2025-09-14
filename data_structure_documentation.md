@@ -30,7 +30,7 @@ The final participant JSON file will now include the following structure:
     }
   },
   
-  // Main Study Responses (8 charts)
+  // Main Study Responses (16 charts)
   "responses": [
     {
       "chartId": 15,
@@ -65,7 +65,7 @@ The final participant JSON file will now include the following structure:
   "chartCategories": {
     "15": "Bar Charts (1-5)",
     "23": "Bar Charts (1-5)",
-    // ... mapping for all 8 charts
+    // ... mapping for all 16 charts
   },
   
   // Timing Information

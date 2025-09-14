@@ -1,5 +1,5 @@
 // Constants
-const TOTAL_CHARTS = 8; // 1 chart per category (8 categories -> 8 charts total)
+const TOTAL_CHARTS = 16; // 2 charts per category (8 categories -> 16 charts total)
 const TOTAL_AVAILABLE_CHARTS = 40; // Total charts available in images folder (1..40)
 const TOTAL_STEPS = TOTAL_CHARTS * 3; // 3 questions per chart
 const container = document.body;
@@ -37,7 +37,7 @@ let sessionManager;
 function getStratifiedCharts() {
   const selected = [];
 
-  // For each category, pick 1 random chart from the category range
+  // For each category, pick 2 unique random charts from the category range
   CHART_CATEGORIES.forEach(category => {
     const [start, end] = category.range;
     const availableInCategory = [];
@@ -46,14 +46,14 @@ function getStratifiedCharts() {
       availableInCategory.push(i);
     }
 
-    // Shuffle availableInCategory and take first 1 to ensure equal chance for each
+    // Shuffle availableInCategory and take first 2 to ensure equal chance for each
     for (let k = availableInCategory.length - 1; k > 0; k--) {
       const r = Math.floor(Math.random() * (k + 1));
       [availableInCategory[k], availableInCategory[r]] = [availableInCategory[r], availableInCategory[k]];
     }
 
-    // Take only 1 item from each category
-    selected.push(availableInCategory[0]);
+    // Take up to two items (handles categories with only 1 or 2 items gracefully)
+    selected.push(...availableInCategory.slice(0, 2));
   });
 
   // Shuffle the final selection to randomize order across categories
