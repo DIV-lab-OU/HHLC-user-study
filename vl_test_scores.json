@@ -121,5 +121,54 @@
     "overallScore": 3,
     "maxScore": 12,
     "percentage": 25
+  },
+  {
+    "timestamp": 1757961501491,
+    "participantId": "participant_1757961478499_i0bjdh01n",
+    "overallScore": 5,
+    "maxScore": 12,
+    "percentage": 42
+  },
+  {
+    "timestamp": 1757966153770,
+    "participantId": "participant_1757966137228_gujwyui7n",
+    "overallScore": 5,
+    "maxScore": 12,
+    "percentage": 42
+  },
+  {
+    "timestamp": 1757966373982,
+    "participantId": "participant_1757966360091_2qyvfz2lf",
+    "overallScore": 2,
+    "maxScore": 12,
+    "percentage": 17
+  },
+  {
+    "timestamp": 1757970292085,
+    "participantId": "participant_1757970273783_kzel6ox1r",
+    "overallScore": 3,
+    "maxScore": 12,
+    "percentage": 25
+  },
+  {
+    "timestamp": 1757972051657,
+    "participantId": "participant_1757972037121_j5h6u05x5",
+    "overallScore": 5,
+    "maxScore": 12,
+    "percentage": 42
+  },
+  {
+    "timestamp": 1757972256051,
+    "participantId": "participant_1757972241437_ollgwe6xh",
+    "overallScore": 3,
+    "maxScore": 12,
+    "percentage": 25
+  },
+  {
+    "timestamp": 1757972642599,
+    "participantId": "participant_1757972626498_rpk9jl2hb",
+    "overallScore": 4,
+    "maxScore": 12,
+    "percentage": 33
   }
 ]

@@ -92,7 +92,7 @@
   1. One chart is randomly selected from each category (ensuring balanced representation)
   2. The 8 selected charts are then shuffled to randomize presentation order
   3. Each session gets a unique combination while maintaining category balance
-- **Chart Categories** (45 total charts):
+- **Chart Categories** (40 total charts):
   1. Single-class Scatterplots: Charts 1-5 (5 charts)
   2. Multi-class Scatterplots: Charts 6-10 (5 charts)
   3. Single-class Line Charts: Charts 11-15 (5 charts)
@@ -100,7 +100,7 @@
   5. Single-class Bar Graphs: Charts 21-25 (5 charts)
   6. Multi-class Bar Graphs: Charts 26-30 (5 charts)
   7. Single-class Maps: Charts 31-35 (5 charts)
-  8. Multi-class Maps: Charts 36-45 (10 charts)
+  8. Multi-class Maps: Charts 36-40 (5 charts)
 - **Example**: Participant A might get [3, 7, 13, 18, 22, 28, 34, 41] → shuffled to [22, 3, 41, 7, 13, 34, 18, 28]
 - **Guarantee**: Every participant sees exactly one chart from each visualization type, but the specific charts and order are randomized
 - Charts are referenced by their filename number (1_chart.png = chartId 1)

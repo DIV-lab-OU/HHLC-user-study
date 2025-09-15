@@ -208,5 +208,103 @@
     "testType": "visualdata-experiment",
     "progress": "completed",
     "completed": true
+  },
+  {
+    "timestamp": 1757961494599,
+    "participantId": "participant_1757961478499_i0bjdh01n",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757961501511,
+    "participantId": "participant_1757961478499_i0bjdh01n",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757966145832,
+    "participantId": "participant_1757966137228_gujwyui7n",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757966153788,
+    "participantId": "participant_1757966137228_gujwyui7n",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757966370629,
+    "participantId": "participant_1757966360091_2qyvfz2lf",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757966373995,
+    "participantId": "participant_1757966360091_2qyvfz2lf",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757970283557,
+    "participantId": "participant_1757970273783_kzel6ox1r",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757970292105,
+    "participantId": "participant_1757970273783_kzel6ox1r",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757972047246,
+    "participantId": "participant_1757972037121_j5h6u05x5",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757972051675,
+    "participantId": "participant_1757972037121_j5h6u05x5",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757972252377,
+    "participantId": "participant_1757972241437_ollgwe6xh",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757972256069,
+    "participantId": "participant_1757972241437_ollgwe6xh",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
+  },
+  {
+    "timestamp": 1757972635733,
+    "participantId": "participant_1757972626498_rpk9jl2hb",
+    "testType": "visualdata-experiment",
+    "progress": "started",
+    "completed": false
+  },
+  {
+    "timestamp": 1757972642616,
+    "participantId": "participant_1757972626498_rpk9jl2hb",
+    "testType": "visualdata-experiment",
+    "progress": "completed",
+    "completed": true
   }
 ]
