@@ -144,6 +144,11 @@ for (let i = 0; i < TOTAL_CHARTS; i++) {
   container.appendChild(understandingStep);
   steps.push(understandingStep);
 
+  // Initialize zoom for the understanding step immediately after adding to DOM
+  setTimeout(() => {
+    initializeZoomDrag(`chart-container-${i}`, `chart-img-${i}`);
+  }, 10);
+
   // --- Question 2: What factors/features drive your understanding? ---
   const factorsStep = document.createElement('section');
   factorsStep.classList.add('step');
@@ -174,6 +179,12 @@ for (let i = 0; i < TOTAL_CHARTS; i++) {
   `;
   container.appendChild(factorsStep);
   steps.push(factorsStep);
+
+  // Initialize zoom for the factors step immediately after adding to DOM
+  setTimeout(() => {
+    initializeZoomDrag(`chart-container-${i}-2`, `chart-img-${i}-2`);
+    initializeCanvasForLasso(`chart-canvas-${i}-2`, `chart-img-${i}-2`);
+  }, 10);
 
   // --- Question 3: Difficulty level ---
   const difficultyStep = document.createElement('section');
@@ -213,6 +224,12 @@ for (let i = 0; i < TOTAL_CHARTS; i++) {
   `;
   container.appendChild(difficultyStep);
   steps.push(difficultyStep);
+
+  // Initialize zoom for the difficulty step immediately after adding to DOM
+  setTimeout(() => {
+    initializeZoomDrag(`chart-container-${i}-3`, `chart-img-${i}-3`);
+    deactivateCanvas(`chart-canvas-${i}-3`);
+  }, 10);
 }
 
 // Navigation functions
@@ -1065,17 +1082,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   
   console.log(`Study loaded for participant: ${sessionManager.getParticipantId()}`);
   
-  // Initialize chart zoom/drag
-  for (let i = 0; i < TOTAL_CHARTS; i++) {
-    initializeZoomDrag(`chart-container-${i}`, `chart-img-${i}`);
-  // Initialize zoom/drag for the auxiliary step images as well; canvases are only needed for the lasso step (-2)
-  initializeZoomDrag(`chart-container-${i}-2`, `chart-img-${i}-2`);
-  initializeZoomDrag(`chart-container-${i}-3`, `chart-img-${i}-3`);
-  // Initialize lasso canvas only for the lasso/factors step (-2)
-  initializeCanvasForLasso(`chart-canvas-${i}-2`, `chart-img-${i}-2`);
-  // ensure difficulty-step canvases are deactivated
-  deactivateCanvas(`chart-canvas-${i}-3`);
-  }
+  // Note: Chart zoom/drag initialization now happens when each step is created
+  // This ensures the DOM elements exist before trying to initialize zoom functionality
 });
 
 // Also initialize when switching steps

@@ -105,7 +105,7 @@
   object-fit: contain;
   transition: transform 0.1s ease;
   user-select: none;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .chart-lasso-canvas {
