@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="sessionManager.js"></script>
+  <title>HHLC User Study - Instructions</title>
+  <style>
+    ol {
+      list-style-position: inside;
+      padding-left: 0;
+      margin: 0;
+    }
+    li {
+      margin-bottom: 0.5em;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="start-container">
+      <h2 style="margin-bottom: 20px;">Instructions for the HHLC User Study</h2>
+      <p style="margin-bottom: 18px; line-height: 1.6;">
+        In this study, you will be shown 8 visualizations. You will receive one random chart from each category. The chart categories include line charts, bar charts, scatterplots, and maps (single class and multi-class). For each visualization you will answer three questions along with one interaction task. 
+      </p>
+
+      <p style="margin-bottom: 15px;">For each visualization, you will be asked:</p>
+
+      <ol style="margin-bottom: 20px; line-height: 1.7;">
+        <li style="margin-bottom: 12px;">Understanding — A short open-text response: describe in your own words what you can understand from the graph.</li>
+        <li style="margin-bottom: 12px;">Salient region (Lasso) — Use your mouse or touch to draw a freeform lasso around the region of the chart you find most important or informative. After drawing, press Save Lasso to record your selection. You must save the lasso before continuing. A small "✎ Lasso" tooltip appears while drawing.</li>
+        <li style="margin-bottom: 12px;">Difficulty — A slider (1–5) where 1 = Very easy and 5 = Very difficult; use this to rate how hard the chart was to interpret.</li>
+      </ol>
+
+      <!-- Demo Video Section -->
+      <div style="margin: 25px 0; padding: 20px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+        <h3 style="margin-bottom: 15px; color: #495057; text-align: center;">📹 Study Demo</h3>
+        <p style="margin-bottom: 15px; text-align: center; color: #6c757d; font-size: 14px;">
+          Watch this short demonstration to see how the study works:
+        </p>
+        <div style="text-align: center; margin-bottom: 15px;">
+          <!-- Placeholder for demo GIF - replace 'demo.gif' with actual filename -->
+          <img src="images/demo.gif" alt="Study demonstration showing lasso interaction" 
+               style="max-width: 100%; height: auto; border-radius: 6px; border: 1px solid #dee2e6; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+               onerror="this.parentElement.innerHTML='<div style=&quot;padding: 40px; color: #6c757d; font-style: italic;&quot;>Demo video will be available here</div>'">
+        </div>
+        <p style="margin: 0; text-align: center; color: #6c757d; font-size: 12px;">
+          The demo shows: text input → lasso drawing → Save Lasso → difficulty rating → Next
+        </p>
+      </div>
+
+      <p style="margin-bottom: 18px; line-height: 1.6;">
+        Navigation: There are no time limits for this study. You may zoom, pan, and use touch gestures (pinch) on the charts to inspect details; use the Reset button if you change the view and want to return to the default. Please take your time to provide thoughtful responses — your answers help us understand how people interpret visualizations.
+      </p>
+
+      <p style="margin-bottom: 18px; line-height: 1.6;">
+        Duration: When you're ready, click "Start Study" below. The study typically takes approximately 45-60 minutes depending on how much you write and how carefully you inspect the charts.
+      </p>
+
+      <button class="start-btn" onclick="window.location.href='study.html'">Start Study</button>
+    </div>
+
+  </div>
+</body>
+
+</html>

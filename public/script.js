@@ -31,8 +31,6 @@ const participantData = JSON.parse(localStorage.getItem("participantData")) || {
   responses: []
 };
 
-let sessionManager;
-
 // Generate stratified selection: one chart from each category
 function getStratifiedCharts() {
   const selected = [];
@@ -380,9 +378,11 @@ function submitData() {
   const timingData = stopStudyTimer();
 
   // Prepare data for intermediate save (before post-study questions)
+  const existingParticipantData = JSON.parse(localStorage.getItem("participantData") || "{}");
   const intermediateData = {
     ...participantData,
-    sessionId: sessionManager ? sessionManager.sessionId : `session_${Date.now()}`,
+    ...existingParticipantData,
+    sessionId: existingParticipantData.sessionId || `session_${Date.now()}`,
     selectedCharts: selectedCharts,
     chartCategories: chartCategories,
     mainStudyCompletedAt: new Date().toISOString(),
@@ -402,10 +402,11 @@ function submitData() {
   // Save intermediate data to localStorage for post-study page
   localStorage.setItem("participantData", JSON.stringify(intermediateData));
   
-  // Mark main study as complete in session
-  if (sessionManager) {
-    sessionManager.markStudyComplete();
-  }
+  // Mark main study as complete in localStorage
+  const existingData = JSON.parse(localStorage.getItem("participantData") || "{}");
+  existingData.studyComplete = true;
+  existingData.studyCompleteTime = new Date().toISOString();
+  localStorage.setItem("participantData", JSON.stringify(existingData));
 
   // Redirect to post-study page instead of completing
   window.location.href = 'postStudy.html';
@@ -454,19 +455,12 @@ function createParticipantIdDisplay() {
   function updateParticipantId() {
     let participantId = null;
     
-    // Try multiple ways to get participant ID
-    if (window.currentSession && typeof window.currentSession.getParticipantId === 'function') {
-      participantId = window.currentSession.getParticipantId();
-    } else if (sessionManager && typeof sessionManager.getParticipantId === 'function') {
-      participantId = sessionManager.getParticipantId();
-    } else {
-      // Try to get from sessionStorage directly
-      try {
-        const sessionData = JSON.parse(sessionStorage.getItem('sessionManager') || '{}');
-        participantId = sessionData.participantId;
-      } catch (e) {
-        console.log('Could not parse session data');
-      }
+    // Get participant ID from localStorage
+    try {
+      const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
+      participantId = participantData.participantId;
+    } catch (e) {
+      console.log('Could not parse participant data from localStorage');
     }
     
     if (participantId && participantId !== 'Loading...') {
@@ -1075,12 +1069,15 @@ function resetZoom(chartId) {
 
 // Initialize zoom/drag for all charts when page loads
 document.addEventListener('DOMContentLoaded', async function() {
-  // Initialize session management
-  sessionManager = window.currentSession || new SessionManager();
-  const sessionValid = await sessionManager.ensureSession();
-  if (!sessionValid) return;
+  // Initialize session management with localStorage
+  const existingData = JSON.parse(localStorage.getItem("participantData") || "{}");
+  if (!existingData.participantId) {
+    console.error("No participant session found. Redirecting to start.");
+    window.location.href = '../index.html';
+    return;
+  }
   
-  console.log(`Study loaded for participant: ${sessionManager.getParticipantId()}`);
+  console.log(`Study loaded for participant: ${existingData.participantId}`);
   
   // Note: Chart zoom/drag initialization now happens when each step is created
   // This ensures the DOM elements exist before trying to initialize zoom functionality

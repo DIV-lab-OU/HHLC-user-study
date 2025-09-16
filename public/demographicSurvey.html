@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>HHLC User Study - Demographics</title>
-    <script src="sessionManager.js"></script>
 </head>
 
 <body>
@@ -280,7 +279,7 @@
             </div>
 
             <!-- Next Button -->
-                  <button type="button" class="start-btn" onclick="submitDemographic()">Continue Experiment</button>
+                  <button type="button" class="start-btn">Continue Experiment</button>
         </div>
     </div>
 
@@ -321,10 +320,13 @@
         document.querySelector(".start-btn").addEventListener("click", async function (e) {
             e.preventDefault(); // prevent default button behavior
             
-            // Ensure we have a valid session
-            const sessionManager = window.currentSession || new SessionManager();
-            const sessionValid = await sessionManager.ensureSession();
-            if (!sessionValid) return;
+            // Get existing participant data from localStorage
+            const participantSession = JSON.parse(localStorage.getItem("participantData") || "{}");
+            if (!participantSession.participantId) {
+                alert('No participant session found. Please restart the study.');
+                window.location.href = '../index.html';
+                return;
+            }
 
             const requiredFields = [
                 document.getElementById("age-dropdown"),
@@ -385,11 +387,10 @@
             };
 
             // Save to localStorage with session context
+            const existingData = JSON.parse(localStorage.getItem("participantData") || "{}");
             const participantData = {
-                participantId: sessionManager.getParticipantId(),
-                sessionStart: Date.now(),
-                demographic: demographicData,
-                responses: [] // we'll fill this later in study.html
+                ...existingData,
+                demographic: demographicData
             };
             
             localStorage.setItem("participantData", JSON.stringify(participantData));

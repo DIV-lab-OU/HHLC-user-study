@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HHLC User Study - VL Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="sessionManager.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="start-container">
+            <h2>Visual Literacy Assessment</h2>
+            <p>Before proceeding to the main study, we would like you to complete a brief visual literacy assessment. This assessment will help us understand your background with data visualizations.</p>
+
+            <br>
+
+            <p>You will be redirected to Visualization Literacy Test. Please complete all sections of the assessment, and then return to this window to continue with the main study.</p>
+
+            <br>
+            
+            <p>Important Instructions:</p>
+            <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                <li>Do not close this browser tab/window</li>
+                <li>Complete all parts of the visual literacy assessment</li>
+                <li>The assessment should take approximately 5-10 minutes</li>
+                <li>After completing the assessment, return to this tab and click "Continue to Main Study"</li>
+            </ul>
+            
+            <br>
+            
+            <div style="text-align: center;">
+                <button class="start-btn" onclick="startVLTest()">Begin Visual Literacy Assessment</button>
+            </div>
+            
+            <br>
+            
+            <!-- Return section (initially hidden) -->
+            <div id="return-section" style="display: none;">
+                <hr>
+                <h3>Completed the Assessment?</h3>
+                <p>If you have finished the visual literacy assessment, please enter your scores below and continue with the main study.</p>
+                
+                <div style="max-width: 400px; margin: 20px auto; text-align: left; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+                    <h4 style="margin-top: 0;">Please Enter Your Assessment Score:</h4>
+                    <p style="font-size: 0.9em; color: #666;">Enter the overall score you received at the end of the visual literacy assessment.</p>
+                    
+                    <div style="margin-top: 15px;">
+                        <label for="overall-score" style="display: block; margin-bottom: 8px; color: #d63384;">Overall Score (out of 12): *</label>
+                        <input type="number" id="overall-score" min="0" max="12" step="1" placeholder="e.g., 8" required style="width: 100%; padding: 12px; border: 2px solid #007cba; border-radius: 4px; font-size: 1.1em; background-color: #f8f9ff;">
+                        <div style="margin-top: 5px; font-size: 0.85em; color: #d63384;">* Required: Enter a number between 0 and 12</div>
+                    </div>
+                </div>
+                
+                <button class="start-btn" onclick="continueToStudy()">Continue to Main Study</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if participant has already started VL test
+        window.addEventListener('load', function() {
+            const sessionManager = new SessionManager();
+            const session = sessionManager.getCurrentSession();
+            
+            if (session && session.vlTestStarted) {
+                // Show return section if they've already started
+                document.getElementById('return-section').style.display = 'block';
+            }
+        });
+
+        function startVLTest() {
+            // Mark that VL test has started
+            const sessionManager = new SessionManager();
+            const session = sessionManager.getCurrentSession();
+            
+            if (session) {
+                session.vlTestStarted = true;
+                session.vlTestStartTime = Date.now();
+                sessionManager.saveSession(session);
+            }
+            
+            // Show return section
+            document.getElementById('return-section').style.display = 'block';
+            
+            // Open VL test in new tab
+            const vlTestUrl = 'https://tools.visualdata.wustl.edu/experiment/#/';
+            window.open(vlTestUrl, '_blank');
+            
+            // Track VL test start
+            trackVLTestProgress('started', false);
+        }
+
+        function continueToStudy() {
+            // Collect VL test score
+            const overallScoreInput = document.getElementById('overall-score').value;
+            const vlScore = overallScoreInput ? parseInt(overallScoreInput) : null;
+            
+            // Validate that score is entered and within valid range
+            if (vlScore === null || overallScoreInput.trim() === '') {
+                alert('Please enter your overall score before continuing to the main study.');
+                document.getElementById('overall-score').focus();
+                return;
+            }
+            
+            if (vlScore < 0 || vlScore > 12) {
+                alert('Please enter a valid score between 0 and 12.');
+                document.getElementById('overall-score').focus();
+                return;
+            }
+            
+            // Mark VL test as completed
+            const sessionManager = new SessionManager();
+            const session = sessionManager.getCurrentSession();
+            
+            if (session) {
+                session.vlTestCompleted = true;
+                session.vlTestEndTime = Date.now();
+                session.vlTestScore = vlScore;
+                sessionManager.saveSession(session);
+            }
+            
+            // Submit score to server (score is guaranteed to be present due to validation above)
+            submitVLTestScore(vlScore);
+            
+            // Track VL test completion
+            trackVLTestProgress('completed', true);
+            
+            // Redirect to main study
+            window.location.href = 'instructions.html';
+        }
+
+        // Submit VL test score to server
+        async function submitVLTestScore(score) {
+            try {
+                const sessionManager = new SessionManager();
+                const participantId = sessionManager.getParticipantId();
+                
+                await fetch('/api/vl-test-scores', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        participantId: participantId,
+                        overallScore: score,
+                        maxScore: 12,
+                        timestamp: Date.now()
+                    })
+                });
+                
+                console.log('VL test score submitted successfully:', score);
+            } catch (error) {
+                console.error('Error submitting VL test score:', error);
+                // Don't block progression if score submission fails
+            }
+        }
+
+        // Track VL test progress on server
+        async function trackVLTestProgress(status, completed) {
+            try {
+                const sessionManager = new SessionManager();
+                const participantId = sessionManager.getParticipantId();
+                
+                await fetch('/api/vl-test-progress', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        participantId: participantId,
+                        testType: 'visualdata-experiment',
+                        progress: status,
+                        completed: completed
+                    })
+                });
+            } catch (error) {
+                console.error('Error tracking VL test progress:', error);
+            }
+        }
+
+        // Handle messages from VL test window (in case they implement postMessage)
+        window.addEventListener('message', function(event) {
+            // Security check - only accept messages from the VL test domain
+            if (event.origin !== 'https://tools.visualdata.wustl.edu') {
+                return;
+            }
+            
+            // Handle completion message if VL test sends one
+            if (event.data && event.data.type === 'vl-test-completed') {
+                document.getElementById('return-section').style.display = 'block';
+                // You could also auto-continue here if desired
+                // continueToStudy();
+            }
+        });
+
+        // Handle window focus to detect return from VL test
+        let vlTestWindow = null;
+        window.addEventListener('focus', function() {
+            if (vlTestWindow && vlTestWindow.closed) {
+                // VL test window was closed, show return section
+                document.getElementById('return-section').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

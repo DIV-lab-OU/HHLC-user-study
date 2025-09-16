@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HHLC User Study - Post-Study Questions</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="sessionManager.js"></script>
     <style>
         .chart-grid {
             display: grid;
@@ -82,21 +81,17 @@
     </div>
 
     <script>
-        let sessionManager;
         let selectedCharts = [];
         
         document.addEventListener('DOMContentLoaded', async function() {
-            // Initialize session management
-            sessionManager = window.currentSession || new SessionManager();
-            const sessionValid = await sessionManager.ensureSession();
-            if (!sessionValid) {
-                alert('Session expired. Please restart the study.');
-                window.location.href = 'index.html';
+            // Load participant data from localStorage
+            const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
+            if (!participantData.participantId) {
+                alert('No participant session found. Please restart the study.');
+                window.location.href = '../index.html';
                 return;
             }
             
-            // Load participant data to get their chart selection
-            const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
             selectedCharts = participantData.selectedCharts || [];
             
             if (selectedCharts.length === 0) {
@@ -154,34 +149,23 @@
             const finalData = {
                 ...participantData,
                 postStudy: postStudyData,
-                sessionId: sessionManager ? sessionManager.sessionId : `session_${Date.now()}`,
+                sessionId: participantData.sessionId || `session_${Date.now()}`,
                 studyCompleteTimestamp: Date.now()
             };
             
-            // Submit to server
+            // Use hybrid data collection system - embedded functions
             try {
-                const response = await fetch('/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(finalData)
-                });
+                const success = await submitParticipantDataLocal(finalData);
                 
-                const result = await response.json();
-                
-                if (result.success) {
-                    // Clear session and local storage
-                    if (sessionManager) {
-                        sessionManager.clearSession();
-                    }
+                if (success) {
+                    // Clear local storage
                     localStorage.removeItem("participantData");
                     localStorage.removeItem("studyStartTime");
                     
                     // Show completion message
                     document.querySelector('.start-container').innerHTML = `
                         <div style="text-align: center; padding: 40px 20px;">
-                            <h1 style="color: #28a745; margin-bottom: 20px;">✓ Study Completed Successfully!</h1>
+                            <h1 style="color: #28a745; margin-bottom: 20px;">✅ Study Completed Successfully!</h1>
                             <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">
                                 Thank you for participating in the HHLC User Study!
                             </p>
@@ -195,12 +179,142 @@
                         </div>
                     `;
                 } else {
-                    throw new Error(result.error || 'Submission failed');
+                    throw new Error('Data submission failed');
                 }
             } catch (error) {
                 console.error('Error submitting post-study data:', error);
                 alert('Error submitting data. Please try again or contact the researchers if the problem persists.');
             }
+        }
+
+        // Embedded data collection functions
+        async function submitParticipantDataLocal(data) {
+            console.log('Starting data submission with hybrid approach...');
+            const results = [];
+            
+            // Method 1: Try Formspree submission (if configured)
+            try {
+                const formspreeSuccess = await submitToFormspree(data);
+                if (formspreeSuccess) {
+                    results.push('✅ Online submission successful');
+                } else {
+                    results.push('ℹ️ Online submission skipped (not configured)');
+                }
+            } catch (error) {
+                console.error('Formspree submission error:', error);
+                results.push('❌ Online submission error');
+            }
+
+            // Method 2: Always download as JSON backup
+            try {
+                downloadAsJSON(data);
+                results.push('✅ JSON file downloaded');
+            } catch (error) {
+                console.error('Download failed:', error);
+                results.push('❌ Download failed');
+            }
+
+            // Method 3: Store in localStorage as emergency backup
+            try {
+                saveToLocalStorage(data);
+                results.push('✅ Browser backup saved');
+            } catch (error) {
+                console.error('LocalStorage failed:', error);
+                results.push('❌ Browser backup failed');
+            }
+
+            console.log('Data submission results:', results);
+            return results.some(r => r.startsWith('✅'));
+        }
+
+        async function submitToFormspree(data) {
+            // ✅ CONFIGURED: Your actual Formspree endpoint
+            const formspreeEndpoint = 'https://formspree.io/f/xdklvvej';
+            
+            // Don't submit if no endpoint configured
+            if (formspreeEndpoint.includes('YOUR_FORM_ID')) {
+                console.log('⚠️ Formspree not configured yet - only downloading JSON file');
+                console.log('📋 To enable online submission:');
+                console.log('   1. Sign up at https://formspree.io');
+                console.log('   2. Create a form and get your endpoint');
+                console.log('   3. Replace YOUR_FORM_ID in postStudy.html');
+                return false;
+            }
+
+            try {
+                const response = await fetch(formspreeEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        sessionId: data.sessionId,
+                        participantData: JSON.stringify(data, null, 2),
+                        timestamp: new Date().toISOString(),
+                        studyType: '8_chart_hhlc_experiment'
+                    })
+                });
+
+                return response.ok;
+            } catch (error) {
+                console.error('Formspree submission failed:', error);
+                return false;
+            }
+        }
+
+        function downloadAsJSON(data) {
+            // Create exact same structure as your current data/participant_*.json files
+            const participantData = {
+                demographic: {
+                    age: data.demographic?.age || '',
+                    education: data.demographic?.education || '',
+                    profession: data.demographic?.profession || '',
+                    dataVizBackground: data.demographic?.dataVizBackground || '',
+                    mediaVisualizationExposure: data.demographic?.mediaVisualizationExposure || '',
+                    visualImpairment: data.demographic?.visualImpairment || '',
+                    mediaVisualizationHelpfulness: data.demographic?.mediaVisualizationHelpfulness || '',
+                    chartFamiliarity: {
+                        barCharts: data.demographic?.chartFamiliarity?.barCharts || '',
+                        lineCharts: data.demographic?.chartFamiliarity?.lineCharts || '',
+                        scatterplots: data.demographic?.chartFamiliarity?.scatterplots || '',
+                        geographicalMaps: data.demographic?.chartFamiliarity?.geographicalMaps || ''
+                    }
+                },
+                responses: data.responses || [],
+                sessionId: data.sessionId,
+                selectedCharts: data.selectedCharts || [],
+                chartCategories: data.chartCategories || {},
+                vlTestScore: data.vlTestScore || {},
+                postStudy: data.postStudy || {},
+                completedAt: new Date().toISOString(),
+                totalTimeMinutes: data.totalTimeMinutes || 0
+            };
+
+            // Create and download the file
+            const blob = new Blob([JSON.stringify(participantData, null, 2)], {
+                type: 'application/json'
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `participant_${data.sessionId || Date.now()}.json`;
+            a.style.display = 'none';
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            console.log(`Downloaded: participant_${data.sessionId || Date.now()}.json`);
+        }
+
+        function saveToLocalStorage(data) {
+            const storageKey = `hhlc_participant_${data.sessionId}`;
+            localStorage.setItem(storageKey, JSON.stringify(data));
+            localStorage.setItem('hhlc_latest_session', data.sessionId);
+            console.log(`Saved to localStorage: ${storageKey}`);
         }
     </script>
 </body>
