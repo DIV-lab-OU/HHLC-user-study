@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp dist/public/*.html dist/",
+    "build:clean": "vite build && cp dist/public/*.html dist/ && rm -rf dist/public",
     "preview": "vite preview",
     "serve": "node server.js"
   },

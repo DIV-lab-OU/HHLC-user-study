@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HHLC User Study - VL Test</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="sessionManager.js"></script>
+  <link rel="stylesheet" crossorigin href="/HHLC-user-study/assets/styles.css">
 </head>
 <body>
     <div class="container">
@@ -60,10 +59,9 @@
     <script>
         // Check if participant has already started VL test
         window.addEventListener('load', function() {
-            const sessionManager = new SessionManager();
-            const session = sessionManager.getCurrentSession();
+            const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
             
-            if (session && session.vlTestStarted) {
+            if (participantData && participantData.vlTestStarted) {
                 // Show return section if they've already started
                 document.getElementById('return-section').style.display = 'block';
             }
@@ -71,14 +69,11 @@
 
         function startVLTest() {
             // Mark that VL test has started
-            const sessionManager = new SessionManager();
-            const session = sessionManager.getCurrentSession();
+            const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
             
-            if (session) {
-                session.vlTestStarted = true;
-                session.vlTestStartTime = Date.now();
-                sessionManager.saveSession(session);
-            }
+            participantData.vlTestStarted = true;
+            participantData.vlTestStartTime = Date.now();
+            localStorage.setItem("participantData", JSON.stringify(participantData));
             
             // Show return section
             document.getElementById('return-section').style.display = 'block';
@@ -110,15 +105,12 @@
             }
             
             // Mark VL test as completed
-            const sessionManager = new SessionManager();
-            const session = sessionManager.getCurrentSession();
+            const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
             
-            if (session) {
-                session.vlTestCompleted = true;
-                session.vlTestEndTime = Date.now();
-                session.vlTestScore = vlScore;
-                sessionManager.saveSession(session);
-            }
+            participantData.vlTestCompleted = true;
+            participantData.vlTestEndTime = Date.now();
+            participantData.vlTestScore = vlScore;
+            localStorage.setItem("participantData", JSON.stringify(participantData));
             
             // Submit score to server (score is guaranteed to be present due to validation above)
             submitVLTestScore(vlScore);
@@ -127,53 +119,39 @@
             trackVLTestProgress('completed', true);
             
             // Redirect to main study
-            window.location.href = 'instructions.html';
+            window.location.href = 'study.html';
         }
 
-        // Submit VL test score to server
+        // Submit VL test score to localStorage
         async function submitVLTestScore(score) {
             try {
-                const sessionManager = new SessionManager();
-                const participantId = sessionManager.getParticipantId();
+                const existingData = JSON.parse(localStorage.getItem("participantData") || "{}");
+                existingData.vlTestScore = {
+                    overallScore: score,
+                    maxScore: 12,
+                    timestamp: Date.now()
+                };
                 
-                await fetch('/api/vl-test-scores', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        participantId: participantId,
-                        overallScore: score,
-                        maxScore: 12,
-                        timestamp: Date.now()
-                    })
-                });
-                
-                console.log('VL test score submitted successfully:', score);
+                localStorage.setItem("participantData", JSON.stringify(existingData));
+                console.log('VL test score saved to localStorage:', score);
             } catch (error) {
-                console.error('Error submitting VL test score:', error);
-                // Don't block progression if score submission fails
+                console.error('Error saving VL test score:', error);
+                // Don't block progression if score saving fails
             }
         }
 
-        // Track VL test progress on server
+        // Track VL test progress in localStorage
         async function trackVLTestProgress(status, completed) {
             try {
-                const sessionManager = new SessionManager();
-                const participantId = sessionManager.getParticipantId();
+                const existingData = JSON.parse(localStorage.getItem("participantData") || "{}");
+                existingData.vlTestProgress = {
+                    status: status,
+                    completed: completed,
+                    timestamp: Date.now()
+                };
                 
-                await fetch('/api/vl-test-progress', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        participantId: participantId,
-                        testType: 'visualdata-experiment',
-                        progress: status,
-                        completed: completed
-                    })
-                });
+                localStorage.setItem("participantData", JSON.stringify(existingData));
+                console.log('VL test progress tracked:', status, completed);
             } catch (error) {
                 console.error('Error tracking VL test progress:', error);
             }

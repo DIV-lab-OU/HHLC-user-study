@@ -88,7 +88,7 @@
             const participantData = JSON.parse(localStorage.getItem("participantData") || "{}");
             if (!participantData.participantId) {
                 alert('No participant session found. Please restart the study.');
-                window.location.href = '../index.html';
+                window.location.href = 'index.html';
                 return;
             }
             

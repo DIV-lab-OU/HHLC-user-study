@@ -1073,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   const existingData = JSON.parse(localStorage.getItem("participantData") || "{}");
   if (!existingData.participantId) {
     console.error("No participant session found. Redirecting to start.");
-    window.location.href = '../index.html';
+    window.location.href = 'index.html';
     return;
   }
   
