@@ -74,8 +74,11 @@
         console.log('Current location:', window.location.href);
         console.log('Attempting navigation to demographicSurvey.html');
         
-        // Navigate using window.location.href
-        window.location.href = './demographicSurvey.html';
+        // Navigate using explicit path construction
+        const baseUrl = window.location.origin + window.location.pathname.replace(/\/$/, '');
+        const targetUrl = baseUrl + '/demographicSurvey.html';
+        console.log('Target URL:', targetUrl);
+        window.location.href = targetUrl;
         
       } catch (error) {
         console.error('Session initialization failed:', error);
