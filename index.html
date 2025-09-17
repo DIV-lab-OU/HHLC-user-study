@@ -81,10 +81,36 @@
   pathname = pathname.replace(/\/index\.html$/i, '');
   pathname = pathname.replace(/\/$/, '');
   const baseUrl = window.location.origin + (pathname === '' ? '' : pathname);
-  const targetUrl = baseUrl + '/demographicSurvey.html';
+  // Probe several likely candidate locations and navigate to the first that responds 200
   console.log('Normalized pathname:', pathname);
-  console.log('Target URL:', targetUrl);
-  window.location.href = targetUrl;
+  const candidates = [
+    baseUrl + '/demographicSurvey.html',
+    baseUrl + '/public/demographicSurvey.html',
+    baseUrl + '/dist/demographicSurvey.html',
+    window.location.origin + '/HHLC-user-study/demographicSurvey.html',
+    window.location.origin + '/HHLC-user-study/public/demographicSurvey.html',
+    window.location.origin + '/HHLC-user-study/dist/demographicSurvey.html'
+  ];
+
+  (async () => {
+    for (const url of candidates) {
+      try {
+        console.log('Probing URL:', url);
+        const res = await fetch(url, { method: 'HEAD' });
+        if (res.ok) {
+          console.log('Found demographic page at:', url);
+          window.location.href = url;
+          return;
+        }
+      } catch (err) {
+        console.warn('Probe failed for', url, err);
+      }
+    }
+    // If all probes fail, navigate to the normalized root candidate (best-effort)
+    const fallback = baseUrl + '/demographicSurvey.html';
+    console.warn('All probes failed, falling back to:', fallback);
+    window.location.href = fallback;
+  })();
         
       } catch (error) {
         console.error('Session initialization failed:', error);
